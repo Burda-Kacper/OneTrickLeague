@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}OneTrickLeague
+			{% endblock %}
+		</title>
+		<link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+		<script src="https://kit.fontawesome.com/32d265316c.js" crossorigin="anonymous"></script>
+	</head>
+	<body style="background-image:url({{ asset('img/homepage/background_1.jpg') }});"> {% block body %}{% endblock %}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		{% block javascripts %}{% endblock %}
+	</body>
 </html>
