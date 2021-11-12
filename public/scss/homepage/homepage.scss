@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-shadow: 0 0 5px #000, 0 0 15px #000;
 }
 .homepage-container {
   width: 850px;
@@ -45,15 +44,18 @@
   text-align: center;
 }
 .homepage-scoreboard-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 25px;
+  margin-bottom: 22px;
 }
 .homepage-scoreboard-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 }
 .homepage-scoreboard-person {
   display: flex;
@@ -77,12 +79,14 @@
   font-weight: 600;
 }
 .homepage-scoreboard-navigation-dot {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   margin: 0 8px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 5px #000, 0 0 15px #000;
+  cursor: pointer;
+  transition: background-color 0.2s;
   &.active {
     background-color: $light-pink;
     box-shadow: 0 0 5px $light-pink, 0 0 15px #000;

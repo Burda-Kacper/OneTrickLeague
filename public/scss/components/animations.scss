@@ -1,0 +1,46 @@
+.anim-slide-in-up {
+  animation-name: anim-slide-in-up;
+  animation-duration: 1s;
+}
+@keyframes anim-slide-in-up {
+  0% {
+    opacity: 0;
+    transform: translate(0, 50px);
+  }
+  100% {
+    opacity: 1;
+    transform: initial;
+  }
+}
+.anim-slide-in-down {
+  animation-name: anim-slide-in-down;
+  animation-duration: 1s;
+}
+@keyframes anim-slide-in-down {
+  0% {
+    opacity: 0;
+    transform: translate(0, -50px);
+  }
+  100% {
+    opacity: 1;
+    transform: initial;
+  }
+}
+.anim-slide-out-up {
+  animation-name: anim-slide-out-up;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes anim-slide-out-up {
+  0% {
+    opacity: 1;
+    transform: initial;
+    position: absolute;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, -50px);
+    position: absolute;
+    visibility: hidden;
+  }
+}

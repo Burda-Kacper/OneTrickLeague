@@ -8,3 +8,10 @@ logout:
 homepage:
   path: /
   controller: App\Controller\HomepageController::homepage
+
+quiz_enter:
+  path: /quiz/enter
+  controller: App\Controller\QuizController::enter
+quiz_start:
+  path: /quiz/start
+  controller: App\Controller\QuizController::start

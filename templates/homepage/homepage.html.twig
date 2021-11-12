@@ -3,53 +3,37 @@
 {% block content %}
 	<section class="homepage-wrapper">
 		<div class="homepage-container">
-			<div class="left">
-				<h1 class="homepage-h1">Witaj w<br/><span>OneTrickLeague</span>
-				</h1>
-				<p class="homepage-intro">Pierwszym takim miejscu w internecie, które pozwoli Ci udowodnić swoje mistrzostwo w znajomości League of Legends.</p>
-				<p class="homepage-intro">Przed przejściem do zabawy możesz utworzyć konto, aby zapisywać swoje postępy, lub zagrać bez logowania (zupełnie za darmo!)</p>
-				<p class="homepage-intro">Wybierz interesującą Cię opcję w menu u góry i... baw się dobrze!</p>
+			<div class="left anim-slide-in-up">
+				{{ include("homepage/_homepageIntro.html.twig") }}
 			</div>
 			<div class="right">
-				<div class="homepage-scoreboard">
-					<p class="homepage-scoreboard-title">Najwięcej punktów (24h)</p>
-					<div class="homepage-scoreboard-row">
-						<div class="homepage-scoreboard-person">
-							<img src="{{ asset("img/temp/1.jpg") }}"/><p>Naganiacz 2000</p>
-						</div>
-						<span class="homepage-scoreboard-score">2137</span>
-					</div>
-					<div class="homepage-scoreboard-row">
-						<div class="homepage-scoreboard-person">
-							<img src="{{ asset("img/temp/2.jpg") }}"/><p>TheKiller</p>
-						</div>
-						<span class="homepage-scoreboard-score">1337</span>
-					</div>
-					<div class="homepage-scoreboard-row">
-						<div class="homepage-scoreboard-person">
-							<img src="{{ asset("img/temp/3.jpg") }}"/><p>Derp</p>
-						</div>
-						<span class="homepage-scoreboard-score">666</span>
-					</div>
-					<div class="homepage-scoreboard-row">
-						<div class="homepage-scoreboard-person">
-							<img src="{{ asset("img/temp/4.jpg") }}"/><p>Mam czikułaczento</p>
-						</div>
-						<span class="homepage-scoreboard-score">69</span>
-					</div>
-					<div class="homepage-scoreboard-row">
-						<div class="homepage-scoreboard-person">
-							<img src="{{ asset("img/temp/5.jpg") }}"/><p>Kabura odpowiedź pls21</p>
-						</div>
-						<span class="homepage-scoreboard-score">1</span>
-					</div>
-				</div>
-				<div class="homepage-scoreboard-navigation">
-					<div class="homepage-scoreboard-navigation-dot active"></div>
-					<div class="homepage-scoreboard-navigation-dot"></div>
-					<div class="homepage-scoreboard-navigation-dot"></div>
+				{{ include('homepage/_scoreboard.html.twig', {
+				scoreboard : {
+					id: 1,
+					hours: 24
+				}
+			}) }}
+				{{ include('homepage/_scoreboard.html.twig', {
+				scoreboard : {
+					id: 2,
+					hours: 168
+				}
+			}) }}
+				{{ include('homepage/_scoreboard.html.twig', {
+				scoreboard : {
+					id: 3,
+					hours: 720
+				}
+			}) }}
+				<div class="homepage-scoreboard-navigation hidden">
+					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-1" data-scoreboard="1"></div>
+					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-2" data-scoreboard="2"></div>
+					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-3" data-scoreboard="3"></div>
 				</div>
 			</div>
 		</div>
 	</section>
+{% endblock %}
+{% block javascripts %}
+	<script src="js/homepage/homepage.js"></script>
 {% endblock %}

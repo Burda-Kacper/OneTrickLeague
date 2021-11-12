@@ -5,6 +5,12 @@
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
+.hidden {
+  display: none !important;
+}
 @import "components/variables";
+@import "components/animations";
+@import "components/components";
 @import "layout";
 @import "homepage/homepage";
+@import "quiz/quiz";
