@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\QuizRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +40,15 @@ class Quiz
      */
     private $started;
 
+    /**
+     * @ORM\OneToMany(targetEntity=QuizUserAnswered::class, mappedBy="quiz", orphanRemoval=true)
+     */
+    private $userAnswers;
+
     public function __construct()
     {
         $this->started = new DateTime('now');
+        $this->userAnswers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +100,36 @@ class Quiz
     public function setStarted(\DateTimeInterface $started): self
     {
         $this->started = $started;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuizUserAnswered[]
+     */
+    public function getUserAnswers(): Collection
+    {
+        return $this->userAnswers;
+    }
+
+    public function addUserAnswer(QuizUserAnswered $userAnswer): self
+    {
+        if (!$this->userAnswers->contains($userAnswer)) {
+            $this->userAnswers[] = $userAnswer;
+            $userAnswer->setQuiz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserAnswer(QuizUserAnswered $userAnswer): self
+    {
+        if ($this->userAnswers->removeElement($userAnswer)) {
+            // set the owning side to null (unless already changed)
+            if ($userAnswer->getQuiz() === $this) {
+                $userAnswer->setQuiz(null);
+            }
+        }
 
         return $this;
     }

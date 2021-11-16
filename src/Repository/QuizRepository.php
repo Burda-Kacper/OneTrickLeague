@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Quiz;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,17 @@ class QuizRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Quiz::class);
+    }
+
+    public function getQuizesCountByIpAndDatetime(string $ip, DateTime $datetime): int
+    {
+        $qb = $this->createQueryBuilder('quiz')
+            ->select("count(quiz.id) AS count")
+            ->andWhere('quiz.ip = :ip')
+            ->andWhere('quiz.started > :datetime')
+            ->setParameter("ip", $ip)
+            ->setParameter("datetime", $datetime);
+        return $qb->getQuery()->execute()[0]['count'];
     }
 
     // /**

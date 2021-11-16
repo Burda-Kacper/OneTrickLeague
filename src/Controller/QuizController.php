@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataSctructure\MainResponse;
 use App\Service\QuizService;
 use App\Service\TokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +25,11 @@ class QuizController extends AbstractController
         return $this->render('quiz/enter.html.twig');
     }
 
-    public function start(Request $request): Response
+    public function start(Request $request): JsonResponse
     {
         $user = $this->getUser();
         $ip = $request->getClientIp();
-        $token = $this->quizService->startQuiz($ip, $user);
-        return new JsonResponse([
-            'success' => true,
-            'data' => "<p>" . $token . "</p>"
-        ]);
+        $response = $this->quizService->startQuiz($ip, $user);
+        return new JsonResponse($response->toJsonResponse());
     }
 }
