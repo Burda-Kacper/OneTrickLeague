@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Quiz;
 use App\Entity\QuizUserAnswered;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,22 @@ class QuizUserAnsweredRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, QuizUserAnswered::class);
+    }
+
+    public function getNewQuizUserAnswered(Quiz $quiz): ?QuizUserAnswered
+    {
+        $qb = $this->createQueryBuilder('qua')
+            ->select("qua")
+            ->andWhere('qua.quiz = :quiz')
+            ->andWhere("qua.answer IS NULL")
+            ->andWhere("qua.active = 1")
+            ->setMaxResults(1)
+            ->setParameter("quiz", $quiz);
+        $result = $qb->getQuery()->execute();
+        if ($result) {
+            return $result[0];
+        }
+        return null;
     }
 
     // /**

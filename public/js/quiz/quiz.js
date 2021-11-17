@@ -11,6 +11,35 @@ $(".quiz-start-button").on("click", function () {
     method: "POST",
     dataType: "JSON",
   }).done(function (response) {
-    $(".quiz-container").html(response.data);
+    loadQuestionInterface(response);
   });
 });
+$(".quiz-container").on("click", ".quiz-question-answer", function () {
+  clearTimeout(autoResponseTimeout);
+  submitAnswer($(this).data("answer-token"));
+});
+function submitAnswer(answerToken) {
+  $(".quiz-question-container").removeClass("anim-slide-in-up");
+  $(".quiz-question-container").addClass("anim-slide-out-up");
+  $.ajax({
+    url: quizAnswerPath,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      answerToken: answerToken,
+      quaId: $(".quiz-question-meta").data("quaid"),
+      token: $(".quiz-question-meta").data("token"),
+    },
+  }).done(function (response) {
+    loadQuestionInterface(response);
+  });
+}
+var autoResponseTimeout = null;
+function loadQuestionInterface(response) {
+  if (response.success) {
+    $(".quiz-container").html(response.data);
+    autoResponseTimeout = setTimeout(function () {
+      submitAnswer(null);
+    }, 15000);
+  }
+}

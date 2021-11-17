@@ -4,8 +4,8 @@ namespace App\DataSctructure;
 
 class MainResponse
 {
-    private $success;
-    private $data;
+    private bool $success;
+    private mixed $data;
 
     public function __construct(bool $success, mixed $data = null)
     {
@@ -18,6 +18,10 @@ class MainResponse
             'success' => $this->success,
             'data' => $this->data
         ];
+    }
+    public function getSuccess(): bool
+    {
+        return $this->success;
     }
     public function getData(): mixed
     {

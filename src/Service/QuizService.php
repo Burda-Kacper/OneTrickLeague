@@ -4,6 +4,8 @@ namespace App\Service;
 
 use App\DataSctructure\MainResponse;
 use App\Entity\Quiz;
+use App\Entity\QuizAnswer;
+use App\Entity\QuizQuestion;
 use App\Entity\QuizUserAnswered;
 use App\Entity\User;
 use App\Repository\QuizRepository;
@@ -19,12 +21,21 @@ class QuizService
     private $em;
     private $repo;
     private $quizQuestionService;
+    private $quizUserAnsweredService;
+    private $quizAnswerService;
 
-    public function __construct(EntityManagerInterface $em, QuizRepository $repo, QuizQuestionService $quizQuestionService)
-    {
+    public function __construct(
+        EntityManagerInterface $em,
+        QuizRepository $repo,
+        QuizQuestionService $quizQuestionService,
+        QuizUserAnsweredService $quizUserAnsweredService,
+        QuizAnswerService $quizAnswerService
+    ) {
         $this->repo = $repo;
         $this->em = $em;
         $this->quizQuestionService = $quizQuestionService;
+        $this->quizUserAnsweredService = $quizUserAnsweredService;
+        $this->quizAnswerService = $quizAnswerService;
     }
 
     public function generateToken(): string
@@ -66,7 +77,7 @@ class QuizService
         $quiz->setIp($ip);
         $this->em->persist($quiz);
         $this->em->flush();
-        return new MainResponse(true);
+        return new MainResponse(true, $token);
     }
 
     public function limitQuizesForIp(string $ip): bool
@@ -78,5 +89,62 @@ class QuizService
             return false;
         }
         return true;
+    }
+
+    public function getNewQuestion(string $token): MainResponse
+    {
+        $quiz = $this->getQuizByToken($token);
+        if (!$quiz) {
+            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+        }
+        $quizUserAnswered = $this->quizUserAnsweredService->getNewQuizUserAnswered($quiz);
+        if ($quizUserAnswered) {
+            return new MainResponse(true, [
+                'text' => "NEXT",
+                'qua' => $quizUserAnswered
+            ]);
+        }
+        return new MainResponse(true, [
+            'text' => "DONE"
+        ]);
+    }
+
+    public function setQuizUserAnswer(string $quizToken, int $quaId, string $answerToken): MainResponse
+    {
+        $quiz = $this->getQuizByToken($quizToken);
+        $answer = null;
+        if ($answerToken) {
+            $answer = $this->quizAnswerService->getAnswerByToken($answerToken);
+            if (!$answer) {
+                return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+            }
+        }
+        if (!$quiz) {
+            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+        }
+        $qua = $this->quizUserAnsweredService->getQuizUserAnsweredByIdQuiz($quaId, $quiz);
+        if (!$qua) {
+            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+        }
+        $isAnswerFromQuestion = true;
+        if ($answer) {
+            $isAnswerFromQuestion = $this->validateAnswerForQuestion($answer, $qua->getQuestion());
+        }
+        if (!$isAnswerFromQuestion) {
+            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+        }
+
+        $qua->setActive(false);
+        if (!$qua->getAnswer()) {
+            $qua->setAnswer($answer);
+            $this->em->persist($qua);
+            $this->em->flush();
+        }
+        return new MainResponse(true);
+    }
+
+    private function validateAnswerForQuestion(QuizAnswer $answer, QuizQuestion $question)
+    {
+        return $answer->getQuestion() === $question;
     }
 }

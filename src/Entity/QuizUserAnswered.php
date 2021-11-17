@@ -34,6 +34,11 @@ class QuizUserAnswered
      */
     private $question;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = true;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -71,6 +76,18 @@ class QuizUserAnswered
     public function setQuestion(?QuizQuestion $question): self
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
