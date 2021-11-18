@@ -11,12 +11,14 @@ use App\Entity\User;
 use App\Repository\QuizRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use QuizError;
 
 class QuizService
 {
     //ETODO: Move ALL Service configs to backend of some sort
     const QUIZ_LIMIT_TIME = "-1 day";
     const QUIZ_LIMIT_AMOUNT = 100;
+    const QUIZ_TIMEOUT_FRAME = "-4 minutes";
 
     private $em;
     private $repo;
@@ -59,7 +61,7 @@ class QuizService
     {
         $canStartQuiz = $this->limitQuizesForIp($ip);
         if (!$canStartQuiz) {
-            return new MainResponse(false, "Zaczynasz zbyt dużo quizów! Odczekaj proszę trochę przed kolejnym.");
+            return new MainResponse(false, QuizError::QUIZ_TOO_MANY_STARTED);
         }
         $quiz = new Quiz;
 
@@ -95,7 +97,7 @@ class QuizService
     {
         $quiz = $this->getQuizByToken($token);
         if (!$quiz) {
-            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+            return new MainResponse(false, QuizError::QUIZ_NOT_FOUND);
         }
         $quizUserAnswered = $this->quizUserAnsweredService->getNewQuizUserAnswered($quiz);
         if ($quizUserAnswered) {
@@ -105,33 +107,41 @@ class QuizService
             ]);
         }
         return new MainResponse(true, [
-            'text' => "DONE"
+            'text' => "DONE",
+            'quiz' => $quiz
         ]);
     }
 
     public function setQuizUserAnswer(string $quizToken, int $quaId, string $answerToken): MainResponse
     {
         $quiz = $this->getQuizByToken($quizToken);
+        if (!$quiz) {
+            return new MainResponse(false, QuizError::QUIZ_NOT_FOUND);
+        }
+        $quizTimeframe = (new DateTime('now'))->modify($this::QUIZ_TIMEOUT_FRAME);
+        if ($quiz->getStarted() < $quizTimeframe) {
+            $quiz->setIsValid(false);
+            $this->em->persist($quiz);
+            $this->em->flush();
+            return new MainResponse(false, QuizError::QUIZ_TOOK_TOO_LONG);
+        }
         $answer = null;
         if ($answerToken) {
             $answer = $this->quizAnswerService->getAnswerByToken($answerToken);
             if (!$answer) {
-                return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+                return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
             }
-        }
-        if (!$quiz) {
-            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
         }
         $qua = $this->quizUserAnsweredService->getQuizUserAnsweredByIdQuiz($quaId, $quiz);
         if (!$qua) {
-            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+            return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
         }
         $isAnswerFromQuestion = true;
         if ($answer) {
             $isAnswerFromQuestion = $this->validateAnswerForQuestion($answer, $qua->getQuestion());
         }
         if (!$isAnswerFromQuestion) {
-            return new MainResponse(false, "Wystąpił błąd z podanym quizem. Proszę rozpocznij nowy quiz.");
+            return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
         }
 
         $qua->setActive(false);

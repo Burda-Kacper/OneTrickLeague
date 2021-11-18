@@ -45,6 +45,11 @@ class Quiz
      */
     private $userAnswers;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isValid = 1;
+
     public function __construct()
     {
         $this->started = new DateTime('now');
@@ -130,6 +135,18 @@ class Quiz
                 $userAnswer->setQuiz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsValid(): ?bool
+    {
+        return $this->isValid;
+    }
+
+    public function setIsValid(bool $isValid): self
+    {
+        $this->isValid = $isValid;
 
         return $this;
     }
