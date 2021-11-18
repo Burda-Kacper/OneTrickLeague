@@ -28,4 +28,10 @@ class QuizUserAnsweredService
             'quiz' => $quiz
         ]);
     }
+    public function getQuizUserAnsweredByQuiz(Quiz $quiz): array
+    {
+        return $this->repo->findBy([
+            'quiz' => $quiz
+        ]);
+    }
 }

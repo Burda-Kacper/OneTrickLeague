@@ -38,8 +38,10 @@ var autoResponseTimeout = null;
 function loadQuestionInterface(response) {
   if (response.success) {
     $(".quiz-container").html(response.data);
-    autoResponseTimeout = setTimeout(function () {
-      submitAnswer(null);
-    }, 15000);
+    if ($(".quiz-question-container").length > 0) {
+      autoResponseTimeout = setTimeout(function () {
+        submitAnswer(null);
+      }, 15000);
+    }
   }
 }

@@ -364,3 +364,32 @@ body {
   width: 100%;
   height: 100%;
   background-color: #ff66b3; }
+
+.quiz-question-finish-header {
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 10px; }
+
+.quiz-question-finish-drumroll {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px; }
+
+.quiz-question-finish-score {
+  font-size: 120px;
+  line-height: 120px;
+  font-weight: 900;
+  margin-bottom: 30px; }
+  .quiz-question-finish-score span {
+    margin: 0 20px; }
+
+.quiz-question-finish-cheer {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 40px; }
+
+.quiz-question-finish-doshare {
+  font-size: 20px;
+  font-weight: 900;
+  margin-bottom: 25px;
+  color: #ff66b3; }

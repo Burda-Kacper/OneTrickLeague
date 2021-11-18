@@ -1,3 +1,9 @@
 <div class="quiz-question-finish-container anim-slide-in-up">
-	<div>{{ quiz.token }}</div>
+	<p class="quiz-question-finish-header">To już koniec quizu!</p>
+	<p class="quiz-question-finish-drumroll">Udało Ci się uzyskać wynik...</p>
+	<p class="quiz-question-finish-score">
+		{{ quizResults.score }}<span>/</span>{##}{{ quizResults.maxScore }}
+	</p>
+	<p class="quiz-question-finish-cheer">{{ quizResults.cheer }}</p>
+	<p class="quiz-question-finish-doshare">Podziel się linkiem i porównaj wyniki tego quizu ze swoimi znajomymi!</p>
 </div>

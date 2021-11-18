@@ -25,19 +25,22 @@ class QuizService
     private $quizQuestionService;
     private $quizUserAnsweredService;
     private $quizAnswerService;
+    private $quizResultCheerService;
 
     public function __construct(
         EntityManagerInterface $em,
         QuizRepository $repo,
         QuizQuestionService $quizQuestionService,
         QuizUserAnsweredService $quizUserAnsweredService,
-        QuizAnswerService $quizAnswerService
+        QuizAnswerService $quizAnswerService,
+        QuizResultCheerService $quizResultCheerService
     ) {
         $this->repo = $repo;
         $this->em = $em;
         $this->quizQuestionService = $quizQuestionService;
         $this->quizUserAnsweredService = $quizUserAnsweredService;
         $this->quizAnswerService = $quizAnswerService;
+        $this->quizResultCheerService = $quizResultCheerService;
     }
 
     public function generateToken(): string
@@ -156,5 +159,24 @@ class QuizService
     private function validateAnswerForQuestion(QuizAnswer $answer, QuizQuestion $question)
     {
         return $answer->getQuestion() === $question;
+    }
+
+    public function getQuizResults(Quiz $quiz): array
+    {
+        $quas = $this->quizUserAnsweredService->getQuizUserAnsweredByQuiz($quiz);
+        $result = [
+            'maxScore' => count($quas),
+            'score' => 0
+        ];
+        foreach ($quas as $qua) {
+            $answer = $qua->getAnswer();
+            if ($answer) {
+                if ($answer->getIsCorrect()) {
+                    $result['score']++;
+                }
+            }
+        }
+        $result['cheer'] = $this->quizResultCheerService->getQuizResultCheerByScore($result['score'])->getText();
+        return $result;
     }
 }

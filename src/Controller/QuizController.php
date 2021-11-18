@@ -77,9 +77,10 @@ class QuizController extends AbstractController
 
     private function getFinishQuizResponse(Quiz $quiz, string $token): MainResponse
     {
+        $quizResults = $this->quizService->getQuizResults($quiz);
         return new MainResponse(true, $this->renderView('quiz/_finish.html.twig', [
             'token' => $token,
-            'quiz' => $quiz
+            'quizResults' => $quizResults
         ]));
     }
 }
