@@ -1,6 +1,5 @@
 body {
   overflow: hidden;
-  background-color: $dark-blue;
 }
 .layout-header,
 .layout-footer {
@@ -31,49 +30,48 @@ body {
 .layout-header-link {
   color: #fff;
   text-decoration: none;
-  padding: 10px;
-  font-size: 18px;
-  margin-left: 15px;
-  font-weight: 600;
-}
-.layout-header-login {
-  color: #fff;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 100%;
-  width: 140px;
-  font-size: 18px;
-  margin-left: 15px;
+  font-size: 12px;
+  line-height: 12px;
   font-weight: 700;
   text-align: center;
-  background-color: $light-pink;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   transition: background-color 0.2s;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  span {
-    display: block;
-    width: 90%;
-    height: 2px;
-    background-color: rgba(255, 255, 255, 0.75);
-    margin: 2px auto;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  width: 100px;
+
+  i {
+    font-size: 20px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &:hover {
-    background-color: $light-pink-hover;
+    background-color: $dark-blue-hover;
+  }
+  &.layout-header-login {
+    background-color: $light-pink;
+    &:hover {
+      background-color: $light-pink-hover;
+    }
   }
 }
 .layout-main {
   width: 100%;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 105px);
   text-shadow: 0 0 5px #000, 0 0 15px #000;
   color: #fff;
   text-align: center;
 }
 .layout-footer {
   width: 100%;
-  height: 60px;
+  height: 45px;
   background-color: $dark-blue;
   display: flex;
   align-items: center;
@@ -85,10 +83,20 @@ body {
   }
 }
 .layout-footer-link {
-  color: #fff;
+  color: #ccc;
   font-size: 14px;
   text-decoration: none;
   font-weight: 700;
+  display: flex;
+  i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+  }
 }
 .layout-footer-author {
   color: #fff;
@@ -96,15 +104,16 @@ body {
   text-decoration: none;
   display: flex;
   align-items: center;
+  font-size: 14px;
   i {
-    font-size: 24px;
+    font-size: 20px;
     margin-right: 3px;
   }
 }
 .layout-footer-note {
   color: #fff;
   font-size: 12px;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   font-weight: 600;
 }
 .layout-main {

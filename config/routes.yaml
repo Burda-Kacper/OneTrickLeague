@@ -15,6 +15,9 @@ quiz_enter:
 quiz_start:
   path: /quiz/start
   controller: App\Controller\QuizController::start
+quiz_saved_enter:
+  path: /quiz/saved/enter/{quizSavedToken}
+  controller: App\Controller\QuizController::enterSaved
 quiz_answer:
   path: /quiz/answer
   controller: App\Controller\QuizController::answer

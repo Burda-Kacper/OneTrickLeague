@@ -6,6 +6,7 @@ use App\DataSctructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizAnswer;
 use App\Entity\QuizQuestion;
+use App\Entity\QuizSaved;
 use App\Entity\QuizUserAnswered;
 use App\Entity\User;
 use App\Repository\QuizRepository;
@@ -26,6 +27,7 @@ class QuizService
     private $quizUserAnsweredService;
     private $quizAnswerService;
     private $quizResultCheerService;
+    private $quizSavedService;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -33,7 +35,8 @@ class QuizService
         QuizQuestionService $quizQuestionService,
         QuizUserAnsweredService $quizUserAnsweredService,
         QuizAnswerService $quizAnswerService,
-        QuizResultCheerService $quizResultCheerService
+        QuizResultCheerService $quizResultCheerService,
+        QuizSavedService $quizSavedService
     ) {
         $this->repo = $repo;
         $this->em = $em;
@@ -41,6 +44,7 @@ class QuizService
         $this->quizUserAnsweredService = $quizUserAnsweredService;
         $this->quizAnswerService = $quizAnswerService;
         $this->quizResultCheerService = $quizResultCheerService;
+        $this->quizSavedService = $quizSavedService;
     }
 
     public function generateToken(): string
@@ -60,7 +64,7 @@ class QuizService
         ]);
     }
 
-    public function startQuiz(string $ip, ?User $user): MainResponse
+    public function startQuiz(string $ip, ?User $user, ?string $quizSavedToken): MainResponse
     {
         $canStartQuiz = $this->limitQuizesForIp($ip);
         if (!$canStartQuiz) {
@@ -68,7 +72,16 @@ class QuizService
         }
         $quiz = new Quiz;
 
-        $questions = $this->quizQuestionService->getQuestionsForQuiz();
+        if ($quizSavedToken) {
+            $questionsResponse = $this->quizSavedService->getQuestionsForQuizSavedToken($quizSavedToken);
+            if (!$questionsResponse->getSuccess()) {
+                return $questionsResponse->toJsonResponse();
+            }
+            $questions = $questionsResponse->getData();
+        } else {
+            $questions = $this->quizQuestionService->getQuestionsForQuiz();
+        }
+
         foreach ($questions as $question) {
             $questionAnswered = new QuizUserAnswered;
             $questionAnswered->setQuiz($quiz);
@@ -178,5 +191,14 @@ class QuizService
         }
         $result['cheer'] = $this->quizResultCheerService->getQuizResultCheerByScore($result['score'])->getText();
         return $result;
+    }
+
+    public function createQuizSaved(Quiz $quiz): string
+    {
+        return $this->quizSavedService->createQuizSaved($quiz);
+    }
+    public function getQuizSavedByToken(string $quizSavedToken): ?QuizSaved
+    {
+        return $this->quizSavedService->getQuizSavedByToken($quizSavedToken);
     }
 }

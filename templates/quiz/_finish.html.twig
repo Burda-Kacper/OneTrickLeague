@@ -5,5 +5,16 @@
 		{{ quizResults.score }}<span>/</span>{##}{{ quizResults.maxScore }}
 	</p>
 	<p class="quiz-question-finish-cheer">{{ quizResults.cheer }}</p>
-	<p class="quiz-question-finish-doshare">Podziel się linkiem i porównaj wyniki tego quizu ze swoimi znajomymi!</p>
+	<div class="quiz-question-finish-share-container">
+		<p>Poniższy link pozwoli na rozwiązanie dokładnie tego samego quizu co Twój. Podziel się nim ze znajomymi i porównajcie swoje wyniki!
+		</p>
+		<div class="quiz-question-finish-link-container">
+			<div class="quiz-question-finish-link-link">
+				{{ url('quiz_saved_enter', {quizSavedToken: quizSavedToken}) }}
+			</div>
+			<div class="quiz-question-finish-link-copy">
+				<i class="fas fa-copy"></i>
+			</div>
+		</div>
+	</div>
 </div>

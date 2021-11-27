@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+	{# ETODO: Handle if quizSaved was either found or not #}
 	<section class="quiz-wrapper">
 		<div class="quiz-container">
 			<div class="quiz-intro-container anim-slide-in-up">
@@ -9,7 +10,11 @@
 				<p class="quiz-explanation">Przed Tobą 10 pytań. Na każde z nich otrzymasz 15 sekund na odpowiedź. Wiesz jak działają quizy, więc nie będziemy się niepotrzebnie rozdrabniać.</p>
 				<p class="quiz-explanation">Nie zapomnij się zalogować, aby śledzić swoje postępy w różnych grach. Po grze możesz także podzielić się swoim wynikiem ze znajomymi i wyzwać ich na pojedynek.</p>
 				<p class="quiz-explanation">W trakcie quizu nie przechodź w obecnym oknie na inną stronę, gdyż to zresetuje cały quiz!<br/>Powodzenia!</p>
-				<button class="quiz-start-button otl-box-shadow">Rozpocznij quiz</button>
+				{% if quizSaved is defined %}
+					<button class="quiz-start-button otl-box-shadow" data-quiz-saved-token="{{ quizSaved.token }}">Rozpocznij quiz</button>
+				{% else %}
+					<button class="quiz-start-button otl-box-shadow">Rozpocznij quiz</button>
+				{% endif %}
 			</div>
 		</div>
 	</section>

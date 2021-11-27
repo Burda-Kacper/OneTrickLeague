@@ -10,6 +10,9 @@ $(".quiz-start-button").on("click", function () {
     url: quizStartPath,
     method: "POST",
     dataType: "JSON",
+    data: {
+      quizSavedToken: $(".quiz-start-button").data("quiz-saved-token"),
+    },
   }).done(function (response) {
     loadQuestionInterface(response);
   });
@@ -45,3 +48,11 @@ function loadQuestionInterface(response) {
     }
   }
 }
+// ETODO: Add copying successful popup
+$(".quiz-container").on(
+  "click",
+  ".quiz-question-finish-link-copy",
+  function () {
+    navigator.clipboard.writeText($(".quiz-question-finish-link-link").text());
+  }
+);

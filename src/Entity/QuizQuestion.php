@@ -34,10 +34,16 @@ class QuizQuestion
      */
     private $isActive = false;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=QuizSaved::class, inversedBy="questions")
+     */
+    private $quizSaved;
+
     public function __construct()
     {
         $this->quiz = new ArrayCollection();
         $this->answers = new ArrayCollection();
+        $this->quizSaved = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +101,30 @@ class QuizQuestion
     public function setIsActive(bool $isActive): self
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuizSaved[]
+     */
+    public function getQuizSaved(): Collection
+    {
+        return $this->quizSaved;
+    }
+
+    public function addQuizSaved(QuizSaved $quizSaved): self
+    {
+        if (!$this->quizSaved->contains($quizSaved)) {
+            $this->quizSaved[] = $quizSaved;
+        }
+
+        return $this;
+    }
+
+    public function removeQuizSaved(QuizSaved $quizSaved): self
+    {
+        $this->quizSaved->removeElement($quizSaved);
 
         return $this;
     }

@@ -7,4 +7,5 @@ class QuizError
     const QUIZ_NOT_FOUND = "Aktywny quiz nie został odnaleziony. Prawdopodobnie został już zakończony.";
     const QUIZ_ANSWER_INVALID = "Wystąpił problem z odpowiedzią. Prawdopodobnie quiz jest zepsuty. Proszę, spróbuj rozpocząć nowy.";
     const QUIZ_UNKNOWN_ERROR = "Wystąpił nieokreślony błąd z quizem. Proszę, spróbuj rozpocząć nowy.";
+    const QUIZ_SAVED_NOT_FOUND = "Podany link do zapisanego quizu jest błędny lub wygasł. Możesz rozpocząć nowy quiz.";
 }

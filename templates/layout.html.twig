@@ -5,9 +5,13 @@
 		<nav class="layout-header-main-navigation">
 			<a class="layout-header-logo" href="{{ path('homepage') }}">OneTrickLeague</a>
 			<div class="layout-header-site-navigation">
-				<a class="layout-header-link" href="{{ path('quiz_enter') }}">Quiz</a>
-				{# <a class="layout-header-link" href="#">Krzyżówka</a> #}
-				<a class="layout-header-login" href="#">Logowanie<span></span>Rejestracja</a>
+				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
+					<i class="fas fa-question"></i>Quiz</a>
+				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
+					<i class="fas fa-align-center"></i>Krzyżówka</a>
+				<a class="layout-header-link layout-header-login" href="#">
+					<i class="fas fa-user"></i>Zaloguj się
+				</a>
 			</div>
 		</nav>
 	</header>
@@ -16,10 +20,12 @@
 	</main>
 	<footer class="layout-footer">
 		<div>
-			<a class="layout-footer-link" href="#">Regulamin</a>
+			<a class="layout-footer-link" href="#">
+				<i class="fas fa-file-alt"></i>Regulamin</a>
 		</div>
 		<div>
-			<a class="layout-footer-link" href="#">Polityka prywatności</a>
+			<a class="layout-footer-link" href="#">
+				<i class="fas fa-user-shield"></i>Polityka prywatności</a>
 		</div>
 		<div></div>
 		<div>

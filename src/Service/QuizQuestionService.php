@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class QuizQuestionService
 {
-    const QUESTIONS_IN_QUIZ = 5;
+    const QUESTIONS_IN_QUIZ = 3;
     const QUESTIONS_IDS_BATCH = 10;
 
     private $em;

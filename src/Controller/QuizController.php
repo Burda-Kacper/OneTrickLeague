@@ -27,11 +27,26 @@ class QuizController extends AbstractController
         return $this->render('quiz/enter.html.twig');
     }
 
+    public function enterSaved(string $quizSavedToken): Response
+    {
+        $quizSaved = $this->quizService->getQuizSavedByToken($quizSavedToken);
+        if ($quizSaved) {
+            return $this->render('quiz/enter.html.twig', [
+                'quizSaved' => $quizSaved
+            ]);
+        }
+        return $this->render('quiz/enter.html.twig', [
+            'quizSavedNotFound' => true
+        ]);
+    }
+
     public function start(Request $request): JsonResponse
     {
+        $quizSavedToken = $request->get("quizSavedToken");
         $user = $this->getUser();
         $ip = $request->getClientIp();
-        $response = $this->quizService->startQuiz($ip, $user);
+        //ETODO: Handle start quiz errors
+        $response = $this->quizService->startQuiz($ip, $user, $quizSavedToken);
         $token = $response->getData();
         return $this->getNewQuestion($token);
     }
@@ -78,9 +93,11 @@ class QuizController extends AbstractController
     private function getFinishQuizResponse(Quiz $quiz, string $token): MainResponse
     {
         $quizResults = $this->quizService->getQuizResults($quiz);
+        $quizSavedToken = $this->quizService->createQuizSaved($quiz);
         return new MainResponse(true, $this->renderView('quiz/_finish.html.twig', [
             'token' => $token,
-            'quizResults' => $quizResults
+            'quizResults' => $quizResults,
+            'quizSavedToken' => $quizSavedToken
         ]));
     }
 }
