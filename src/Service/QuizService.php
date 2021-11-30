@@ -75,7 +75,7 @@ class QuizService
         if ($quizSavedToken) {
             $questionsResponse = $this->quizSavedService->getQuestionsForQuizSavedToken($quizSavedToken);
             if (!$questionsResponse->getSuccess()) {
-                return $questionsResponse->toJsonResponse();
+                return $questionsResponse;
             }
             $questions = $questionsResponse->getData();
         } else {

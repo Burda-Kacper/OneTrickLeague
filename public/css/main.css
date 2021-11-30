@@ -86,6 +86,14 @@
 .otl-box-shadow {
   box-shadow: 0 0 5px #000, 0 0 15px #000; }
 
+.otl-glass {
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18); }
+
 body {
   overflow: hidden; }
 
@@ -201,6 +209,13 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed; }
+
+.layout-header-login-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin: -7px 0 2px 0; }
 
 .homepage-wrapper {
   width: 100%;
@@ -397,13 +412,7 @@ body {
   margin-bottom: 35px; }
 
 .quiz-question-finish-share-container {
-  padding: 25px;
-  background: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18); }
+  padding: 25px; }
 
 .quiz-question-finish-link-container {
   margin: 35px auto 0 auto;
@@ -433,4 +442,60 @@ body {
   cursor: pointer;
   transition: background-color 0.2s; }
   .quiz-question-finish-link-copy:hover {
+    background-color: #ff88c4; }
+
+.login-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.login-container {
+  width: 800px;
+  display: flex;
+  justify-content: space-between; }
+
+.login-card {
+  width: 375px;
+  padding: 15px 15px 30px 15px;
+  text-align: left; }
+
+.login-header {
+  font-size: 30px;
+  font-weight: 900;
+  margin-bottom: 15px; }
+
+.login-label {
+  font-weight: 700;
+  margin-bottom: 3px;
+  display: block;
+  margin-bottom: 10px; }
+
+.login-input {
+  width: 100%;
+  height: 42px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 0;
+  box-shadow: 0 0 5px #000;
+  border-radius: 10px;
+  outline: none;
+  padding: 0 0 0 10px;
+  color: #fff;
+  margin-bottom: 15px; }
+
+.login-button {
+  margin: 25px auto 0 auto;
+  display: block;
+  width: 200px;
+  height: 42px;
+  cursor: pointer;
+  background-color: #ff66b3;
+  color: #fff;
+  font-weight: 900;
+  border: 0;
+  border-radius: 10px;
+  text-transform: uppercase;
+  transition: background-color 0.2s; }
+  .login-button:hover {
     background-color: #ff88c4; }

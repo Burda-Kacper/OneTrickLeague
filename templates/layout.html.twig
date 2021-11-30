@@ -9,9 +9,15 @@
 					<i class="fas fa-question"></i>Quiz</a>
 				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
 					<i class="fas fa-align-center"></i>Krzyżówka</a>
-				<a class="layout-header-link layout-header-login" href="#">
-					<i class="fas fa-user"></i>Zaloguj się
-				</a>
+				{% if app.user %}
+					<a class="layout-header-link layout-header-login" href="{{ path('login') }}">
+						<img class="layout-header-login-image" src="{{ asset("img/temp/2.jpg") }}"/>Moje konto
+					</a>
+				{% else %}
+					<a class="layout-header-link layout-header-login" href="{{ path('login') }}">
+						<i class="fas fa-user"></i>Zaloguj się
+					</a>
+				{% endif %}
 			</div>
 		</nav>
 	</header>
