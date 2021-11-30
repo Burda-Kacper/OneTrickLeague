@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\DataSctructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizUserAnswered;
-use App\Service\QuizService;
+use App\ServiceQuiz\QuizService;
 use QuizError;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

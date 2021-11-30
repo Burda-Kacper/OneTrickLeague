@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\ServiceQuiz;
 
 use App\Entity\Quiz;
 use App\Entity\QuizUserAnswered;
