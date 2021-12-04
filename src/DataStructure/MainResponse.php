@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataSctructure;
+namespace App\DataStructure;
 
 class MainResponse
 {

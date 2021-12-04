@@ -2,13 +2,13 @@
 
 namespace App\ServiceQuiz;
 
-use App\DataSctructure\MainResponse;
+use App\DataStructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizAnswer;
 use App\Entity\QuizSaved;
 use App\Repository\QuizSavedRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use QuizError;
+use App\Error\QuizError;
 
 class QuizSavedService
 {

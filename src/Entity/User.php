@@ -42,9 +42,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $quizzes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=ProfilePicture::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $profilePicture;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=ProfilePicture::class, mappedBy="userHasPictures")
+     */
+    private $availablePictures;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
+        $this->availablePictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +168,45 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($quiz->getUser() === $this) {
                 $quiz->setUser(null);
             }
+        }
+
+        return $this;
+    }
+
+    public function getProfilePicture(): ?ProfilePicture
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture(?ProfilePicture $profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ProfilePicture[]
+     */
+    public function getAvailablePictures(): Collection
+    {
+        return $this->availablePictures;
+    }
+
+    public function addAvailablePicture(ProfilePicture $availablePicture): self
+    {
+        if (!$this->availablePictures->contains($availablePicture)) {
+            $this->availablePictures[] = $availablePicture;
+            $availablePicture->addUserHasPicture($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvailablePicture(ProfilePicture $availablePicture): self
+    {
+        if ($this->availablePictures->removeElement($availablePicture)) {
+            $availablePicture->removeUserHasPicture($this);
         }
 
         return $this;

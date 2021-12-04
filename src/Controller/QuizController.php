@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\DataSctructure\MainResponse;
+use App\DataStructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizUserAnswered;
 use App\ServiceQuiz\QuizService;
-use QuizError;
+use App\Error\QuizError;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

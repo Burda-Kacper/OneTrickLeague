@@ -2,7 +2,7 @@
 
 namespace App\ServiceQuiz;
 
-use App\DataSctructure\MainResponse;
+use App\DataStructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizAnswer;
 use App\Entity\QuizQuestion;
@@ -12,7 +12,7 @@ use App\Entity\User;
 use App\Repository\QuizRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use QuizError;
+use App\Error\QuizError;
 
 class QuizService
 {

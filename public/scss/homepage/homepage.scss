@@ -1,9 +1,10 @@
 .homepage-wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 25px 0;
 }
 .homepage-container {
   width: 850px;
@@ -16,7 +17,7 @@
     padding-bottom: 125px;
   }
   .right {
-    width: 350px;
+    width: 400px;
     padding-top: 125px;
   }
 }
@@ -42,6 +43,7 @@
 }
 .homepage-scoreboard {
   text-align: center;
+  padding: 15px 25px;
 }
 .homepage-scoreboard-title {
   font-size: 22px;

@@ -10,8 +10,8 @@
 				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
 					<i class="fas fa-align-center"></i>Krzyżówka</a>
 				{% if app.user %}
-					<a class="layout-header-link layout-header-login" href="{{ path('login') }}">
-						<img class="layout-header-login-image" src="{{ asset("img/temp/2.jpg") }}"/>Moje konto
+					<a class="layout-header-link layout-header-login" href="{{ path('profile_main') }}">
+						<img class="layout-header-login-image" src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>Moje konto
 					</a>
 				{% else %}
 					<a class="layout-header-link layout-header-login" href="{{ path('login') }}">

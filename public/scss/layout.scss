@@ -121,6 +121,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  height: calc(100vh - 105px);
+  overflow-y: auto;
 }
 .layout-header-login-image {
   width: 30px;

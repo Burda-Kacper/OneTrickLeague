@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Error;
+
 class QuizError
 {
     const QUIZ_TOO_MANY_STARTED = "Zaczynasz zbyt dużo quizów! Odczekaj proszę trochę przed kolejnym.";

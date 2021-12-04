@@ -39,6 +39,7 @@ function submitAnswer(answerToken) {
 }
 var autoResponseTimeout = null;
 function loadQuestionInterface(response) {
+  //ETODO: Handle errors
   if (response.success) {
     $(".quiz-container").html(response.data);
     if ($(".quiz-question-container").length > 0) {

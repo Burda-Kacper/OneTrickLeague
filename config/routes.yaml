@@ -21,3 +21,13 @@ quiz_saved_enter:
 quiz_answer:
   path: /quiz/answer
   controller: App\Controller\QuizController::answer
+
+profile_main:
+  path: /profile
+  controller: App\Controller\ProfileController::profile
+profile_section:
+  path: /profile/section
+  controller: App\Controller\ProfileController::section
+profile_picture:
+  path: /profile/picture
+  controller: App\Controller\ProfileController::picture
