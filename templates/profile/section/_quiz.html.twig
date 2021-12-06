@@ -1,19 +1,19 @@
 <div class="profile-stats-container">
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Zakończonych Quizów:</p>
-		<p class="profile-stats-stat">567</p>
+		<p class="profile-stats-stat">{{ userQuizCache.finishedAmount }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Średnia punktów:</p>
-		<p class="profile-stats-stat">8,7</p>
+		<p class="profile-stats-stat">{{ userQuizCache.averageScore }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Poprawne odpowiedzi:</p>
-		<p class="profile-stats-stat">4789</p>
+		<p class="profile-stats-stat">{{ userQuizCache.answerRightAmount }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Niepoprawne odpowiedzi:</p>
-		<p class="profile-stats-stat">321</p>
+		<p class="profile-stats-stat">{{ userQuizCache.answerWrongAmount }}</p>
 	</div>
 </div>
 <div class="profile-quiz-history otl-glass anim-slide-in-up">

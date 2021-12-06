@@ -1,7 +1,7 @@
 $(".profile-menu-section").on("click", function () {
   loadProfileSection($(this).data("section"));
 });
-
+//ETODO: Handle errors
 function loadProfileSection(section) {
   $(".profile-menu-section").each(function () {
     $(this).removeClass("active");
@@ -24,7 +24,7 @@ function loadProfileSection(section) {
 $(document).ready(function () {
   loadProfileSection("profile");
 });
-
+//ETODO: Handle errors
 $(".profile-data-container").on(
   "click",
   ".profile-image-select-entry",
@@ -47,3 +47,12 @@ $(".profile-data-container").on(
     });
   }
 );
+$(".profile-menu-reload").on("click", function () {
+  $.ajax({
+    url: profileClearCachePath,
+    method: "POST",
+    dataType: "JSON",
+  }).done(function (response) {
+    console.log(response);
+  });
+});

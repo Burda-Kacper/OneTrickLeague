@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ServiceQuiz;
+namespace App\ServiceCommon;
 
 class TokenService
 {

@@ -53,6 +53,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $availablePictures;
 
+    /**
+     * @ORM\OneToMany(targetEntity=QuizResultCache::class, mappedBy="user")
+     */
+    private $quizResultCache;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
@@ -208,6 +213,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->availablePictures->removeElement($availablePicture)) {
             $availablePicture->removeUserHasPicture($this);
         }
+
+        return $this;
+    }
+
+    public function getQuizResultCache(): ?QuizResultCache
+    {
+        return $this->quizResultCache;
+    }
+
+    public function setQuizResultCache(QuizResultCache $quizResultCache): self
+    {
+        // set the owning side of the relation if necessary
+        if ($quizResultCache->getUser() !== $this) {
+            $quizResultCache->setUser($this);
+        }
+
+        $this->quizResultCache = $quizResultCache;
 
         return $this;
     }

@@ -13,6 +13,7 @@ use App\Repository\QuizRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Error\QuizError;
+use App\ServiceCommon\TokenService;
 
 class QuizService
 {
@@ -197,8 +198,17 @@ class QuizService
     {
         return $this->quizSavedService->createQuizSaved($quiz);
     }
+
     public function getQuizSavedByToken(string $quizSavedToken): ?QuizSaved
     {
         return $this->quizSavedService->getQuizSavedByToken($quizSavedToken);
+    }
+
+    public function finishQuiz(Quiz $quiz): Quiz
+    {
+        $quiz->setIsFinished(true);
+        $this->em->persist($quiz);
+        $this->em->flush($quiz);
+        return $quiz;
     }
 }

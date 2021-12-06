@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Quiz;
+use App\Entity\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,6 +30,17 @@ class QuizRepository extends ServiceEntityRepository
             ->setParameter("ip", $ip)
             ->setParameter("datetime", $datetime);
         return $qb->getQuery()->execute()[0]['count'];
+    }
+
+    public function getQuizCacheInfoForUser(User $user): array
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->select("q")
+            ->andWhere('q.isFinished = 1')
+            ->andWhere('q.isValid = 1')
+            ->andWhere('q.user = :user')
+            ->setParameter('user', $user);
+        return $qb->getQuery()->execute();
     }
 
     // /**

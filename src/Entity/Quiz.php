@@ -50,6 +50,11 @@ class Quiz
      */
     private $isValid = 1;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFinished = 0;
+
     public function __construct()
     {
         $this->started = new DateTime('now');
@@ -147,6 +152,18 @@ class Quiz
     public function setIsValid(bool $isValid): self
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getIsFinished(): ?bool
+    {
+        return $this->isFinished;
+    }
+
+    public function setIsFinished(bool $isFinished): self
+    {
+        $this->isFinished = $isFinished;
 
         return $this;
     }

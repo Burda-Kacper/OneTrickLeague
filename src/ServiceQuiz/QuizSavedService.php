@@ -9,6 +9,7 @@ use App\Entity\QuizSaved;
 use App\Repository\QuizSavedRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Error\QuizError;
+use App\ServiceCommon\TokenService;
 
 class QuizSavedService
 {

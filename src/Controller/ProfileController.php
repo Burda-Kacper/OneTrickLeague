@@ -27,30 +27,41 @@ class ProfileController extends AbstractController
     public function section(Request $request): JsonResponse
     {
         //ETODO: Fetch real data :) 
-        $user = $this->getUser();
         $section = $request->get('section');
-        $response =  new JsonResponse([
+        switch ($section) {
+            case 'quiz':
+                return $this->sectionQuiz();
+            case 'profile':
+                return $this->sectionProfile();
+        }
+        return new JsonResponse([
             'success' => false,
             'data' => ProfileError::PROFILE_WRONG_SECTION
         ]);
-        switch ($section) {
-            case 'quiz':
-                $response = new JsonResponse([
-                    'success' => true,
-                    'data' => $this->renderView('profile/section/_quiz.html.twig')
-                ]);
-                break;
-            case 'profile':
-                $availablePictures = $user->getAvailablePictures();
-                $response = new JsonResponse([
-                    'success' => true,
-                    'data' => $this->renderView('profile/section/_profile.html.twig', [
-                        'availablePictures' => $availablePictures
-                    ])
-                ]);
-                break;
-        }
-        return $response;
+    }
+
+    public function sectionProfile(): JsonResponse
+    {
+        $user = $this->getUser();
+        $availablePictures = $user->getAvailablePictures();
+        return new JsonResponse([
+            'success' => true,
+            'data' => $this->renderView('profile/section/_profile.html.twig', [
+                'availablePictures' => $availablePictures
+            ])
+        ]);
+    }
+
+    public function sectionQuiz(): JsonResponse
+    {
+        $user = $this->getUser();
+        $userQuizCache = $this->profileService->getUserQuizCache($user);
+        return new JsonResponse([
+            'success' => true,
+            'data' => $this->renderView('profile/section/_quiz.html.twig', [
+                'userQuizCache' => $userQuizCache
+            ])
+        ]);
     }
 
     public function picture(Request $request): JsonResponse
@@ -58,6 +69,13 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
         $pictureId = $request->get("pictureId");
         $response = $this->profileService->setProfilePicture($user, intval($pictureId));
+        return new JsonResponse($response->toJsonResponse());
+    }
+
+    public function refresh(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        $response = $this->profileService->refreshResultCache($user);
         return new JsonResponse($response->toJsonResponse());
     }
 }

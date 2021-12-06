@@ -12,6 +12,7 @@
 .profile-menu-container {
   position: fixed;
   max-height: calc(100vh - 155px);
+  width: 175px;
   overflow-y: auto;
 }
 .profile-data-container {
@@ -177,4 +178,16 @@
   &:hover {
     border: 3px solid $light-pink;
   }
+}
+.profile-menu-reload {
+  background-color: $light-pink;
+  text-transform: uppercase;
+  font-weight: 900;
+  &:hover {
+    background-color: $light-pink-hover;
+  }
+}
+.profile-menu-outofsync {
+  font-size: 12px;
+  margin-bottom: 15px;
 }
