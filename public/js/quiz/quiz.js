@@ -5,7 +5,7 @@ $(".quiz-start-button").on("click", function () {
   $(this).data("disabled", "disabled");
   const quizIntroContainer = $(".quiz-intro-container");
   quizIntroContainer.removeClass("anim-slide-in-up");
-  quizIntroContainer.addClass("anim-slide-out-up");
+  quizIntroContainer.addClass("anim-slide-out-up-absolute");
   $.ajax({
     url: quizStartPath,
     method: "POST",
@@ -23,7 +23,7 @@ $(".quiz-container").on("click", ".quiz-question-answer", function () {
 });
 function submitAnswer(answerToken) {
   $(".quiz-question-container").removeClass("anim-slide-in-up");
-  $(".quiz-question-container").addClass("anim-slide-out-up");
+  $(".quiz-question-container").addClass("anim-slide-out-up-absolute");
   $.ajax({
     url: quizAnswerPath,
     method: "POST",

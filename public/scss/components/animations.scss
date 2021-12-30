@@ -26,12 +26,12 @@
     transform: initial;
   }
 }
-.anim-slide-out-up {
-  animation-name: anim-slide-out-up;
+.anim-slide-out-up-absolute {
+  animation-name: anim-slide-out-up-absolute;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
-@keyframes anim-slide-out-up {
+@keyframes anim-slide-out-up-absolute {
   0% {
     opacity: 1;
     transform: initial;
@@ -42,6 +42,21 @@
     transform: translate(0, -50px);
     position: absolute;
     visibility: hidden;
+  }
+}
+.anim-slide-out-up {
+  animation-name: anim-slide-out-up;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+@keyframes anim-slide-out-up {
+  0% {
+    opacity: 1;
+    transform: initial;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, -50px);
   }
 }
 .anim-timer-bar-collapse {

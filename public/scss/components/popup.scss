@@ -1,0 +1,116 @@
+.popup-wrapper {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+}
+.popup-container {
+  display: flex;
+  width: 400px;
+  max-width: calc(100vw - 50px);
+  flex-direction: column-reverse;
+}
+.popup-entry {
+  width: 100%;
+  min-height: 80px;
+  padding: 8px;
+  color: #fff;
+  margin-top: 25px;
+  background-color: #fff;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  .popup-entry-bar {
+    background-color: #000;
+  }
+  .popup-entry-title {
+    color: #000;
+  }
+
+  &.success {
+    .popup-entry-bar {
+      background-color: $green;
+    }
+    .popup-entry-title {
+      color: $green;
+    }
+  }
+  &.error {
+    .popup-entry-bar {
+      background-color: $red;
+    }
+    .popup-entry-title {
+      color: $red;
+    }
+  }
+  &.message {
+    .popup-entry-bar {
+      background-color: $dark-blue;
+    }
+    .popup-entry-title {
+      color: $dark-blue;
+    }
+  }
+}
+.popup-entry-bar {
+  height: 70px;
+  width: 5px;
+  border-radius: 3px;
+  align-self: center;
+}
+.popup-entry-close-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+}
+.popup-entry-close {
+  width: 40px;
+  height: 40px;
+  color: $dark-blue;
+  border: none;
+  background-color: transparent;
+  font-size: 25px;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    color: $light-pink-hover;
+  }
+}
+.popup-entry-content {
+  width: calc(100% - 70px);
+  padding: 5px 0;
+}
+.popup-entry-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 18px;
+  margin-bottom: 2px;
+  i {
+    margin-right: 3px;
+    width: 22px;
+  }
+}
+.popup-entry-text {
+  color: #000;
+  font-weight: 600;
+  margin-left: 30px;
+}
+
+.popup-entry-bar-shrink {
+  animation-name: popup-entry-bar-shrink;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes popup-entry-bar-shrink {
+  0% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}

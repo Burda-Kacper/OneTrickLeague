@@ -22,7 +22,7 @@ function loadProfileSection(section) {
 }
 
 $(document).ready(function () {
-  loadProfileSection("profile");
+  loadProfileSection("quiz");
 });
 //ETODO: Handle errors
 $(".profile-data-container").on(
