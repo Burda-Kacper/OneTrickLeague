@@ -12,7 +12,7 @@ use App\Entity\User;
 use App\Repository\QuizRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Error\QuizError;
+use App\Message\QuizMessage;
 use App\ServiceCommon\TokenService;
 
 class QuizService
@@ -69,11 +69,13 @@ class QuizService
     {
         $canStartQuiz = $this->limitQuizesForIp($ip);
         if (!$canStartQuiz) {
-            return new MainResponse(false, QuizError::QUIZ_TOO_MANY_STARTED);
+            return new MainResponse(false, QuizMessage::QUIZ_TOO_MANY_STARTED);
         }
         $quiz = new Quiz;
+        $quizSaved = null;
 
         if ($quizSavedToken) {
+            $quizSaved = $this->quizSavedService->getQuizSavedByToken($quizSavedToken);
             $questionsResponse = $this->quizSavedService->getQuestionsForQuizSavedToken($quizSavedToken);
             if (!$questionsResponse->getSuccess()) {
                 return $questionsResponse;
@@ -82,6 +84,7 @@ class QuizService
         } else {
             $questions = $this->quizQuestionService->getQuestionsForQuiz();
         }
+
 
         foreach ($questions as $question) {
             $questionAnswered = new QuizUserAnswered;
@@ -96,6 +99,9 @@ class QuizService
         $quiz->setIp($ip);
         $this->em->persist($quiz);
         $this->em->flush();
+
+        $quizUserAnswers = $this->quizUserAnsweredService->getQuizUserAnsweredByQuiz($quiz);
+        $quizSaved = $this->assignQuizSavedToQuiz($quiz, $quizSaved, $quizUserAnswers);
         return new MainResponse(true, $token);
     }
 
@@ -114,7 +120,7 @@ class QuizService
     {
         $quiz = $this->getQuizByToken($token);
         if (!$quiz) {
-            return new MainResponse(false, QuizError::QUIZ_NOT_FOUND);
+            return new MainResponse(false, QuizMessage::QUIZ_NOT_FOUND);
         }
         $quizUserAnswered = $this->quizUserAnsweredService->getNewQuizUserAnswered($quiz);
         if ($quizUserAnswered) {
@@ -133,32 +139,32 @@ class QuizService
     {
         $quiz = $this->getQuizByToken($quizToken);
         if (!$quiz) {
-            return new MainResponse(false, QuizError::QUIZ_NOT_FOUND);
+            return new MainResponse(false, QuizMessage::QUIZ_NOT_FOUND);
         }
         $quizTimeframe = (new DateTime('now'))->modify($this::QUIZ_TIMEOUT_FRAME);
         if ($quiz->getStarted() < $quizTimeframe) {
             $quiz->setIsValid(false);
             $this->em->persist($quiz);
             $this->em->flush();
-            return new MainResponse(false, QuizError::QUIZ_TOOK_TOO_LONG);
+            return new MainResponse(false, QuizMessage::QUIZ_TOOK_TOO_LONG);
         }
         $answer = null;
         if ($answerToken) {
             $answer = $this->quizAnswerService->getAnswerByToken($answerToken);
             if (!$answer) {
-                return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
+                return new MainResponse(false, QuizMessage::QUIZ_ANSWER_INVALID);
             }
         }
         $qua = $this->quizUserAnsweredService->getQuizUserAnsweredByIdQuiz($quaId, $quiz);
         if (!$qua) {
-            return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
+            return new MainResponse(false, QuizMessage::QUIZ_ANSWER_INVALID);
         }
         $isAnswerFromQuestion = true;
         if ($answer) {
             $isAnswerFromQuestion = $this->validateAnswerForQuestion($answer, $qua->getQuestion());
         }
         if (!$isAnswerFromQuestion) {
-            return new MainResponse(false, QuizError::QUIZ_ANSWER_INVALID);
+            return new MainResponse(false, QuizMessage::QUIZ_ANSWER_INVALID);
         }
 
         $qua->setActive(false);
@@ -194,9 +200,9 @@ class QuizService
         return $result;
     }
 
-    public function createQuizSaved(Quiz $quiz): string
+    public function assignQuizSavedToQuiz(Quiz $quiz, ?QuizSaved $quizSaved, array $quizUserAnswers): string
     {
-        return $this->quizSavedService->createQuizSaved($quiz);
+        return $this->quizSavedService->assignQuizSavedToQuiz($quiz, $quizSaved, $quizUserAnswers);
     }
 
     public function getQuizSavedByToken(string $quizSavedToken): ?QuizSaved
@@ -210,5 +216,16 @@ class QuizService
         $this->em->persist($quiz);
         $this->em->flush($quiz);
         return $quiz;
+    }
+
+    public function getUserQuizes(User $user, int $amount = 0): array
+    {
+        return $this->repo->findBy([
+            'user' => $user,
+            'isFinished' => 1,
+            'isValid' => 1
+        ], [
+            'started' => "DESC"
+        ], $amount);
     }
 }

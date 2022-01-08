@@ -55,6 +55,12 @@ class Quiz
      */
     private $isFinished = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=QuizSaved::class, inversedBy="quizzes")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $quizSaved;
+
     public function __construct()
     {
         $this->started = new DateTime('now');
@@ -164,6 +170,18 @@ class Quiz
     public function setIsFinished(bool $isFinished): self
     {
         $this->isFinished = $isFinished;
+
+        return $this;
+    }
+
+    public function getQuizSaved(): ?QuizSaved
+    {
+        return $this->quizSaved;
+    }
+
+    public function setQuizSaved(?QuizSaved $quizSaved): self
+    {
+        $this->quizSaved = $quizSaved;
 
         return $this;
     }

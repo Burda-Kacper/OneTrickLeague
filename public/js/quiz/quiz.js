@@ -3,6 +3,7 @@ $(".quiz-start-button").on("click", function () {
     return;
   }
   $(this).data("disabled", "disabled");
+  const that = $(this);
   const quizIntroContainer = $(".quiz-intro-container");
   quizIntroContainer.removeClass("anim-slide-in-up");
   quizIntroContainer.addClass("anim-slide-out-up-absolute");
@@ -14,7 +15,15 @@ $(".quiz-start-button").on("click", function () {
       quizSavedToken: $(".quiz-start-button").data("quiz-saved-token"),
     },
   }).done(function (response) {
-    loadQuestionInterface(response);
+    if (response.success) {
+      loadQuestionInterface(response);
+    } else {
+      that.data("disabled", "");
+      that.data("quiz-saved-token", "");
+      quizIntroContainer.removeClass("anim-slide-out-up-absolute");
+      quizIntroContainer.addClass("anim-slide-in-up");
+      popup.openPopup("error", "Nie można zacząć Quizu", response.data);
+    }
   });
 });
 $(".quiz-container").on("click", ".quiz-question-answer", function () {
@@ -39,7 +48,6 @@ function submitAnswer(answerToken) {
 }
 var autoResponseTimeout = null;
 function loadQuestionInterface(response) {
-  //ETODO: Handle errors
   if (response.success) {
     $(".quiz-container").html(response.data);
     if ($(".quiz-question-container").length > 0) {
@@ -47,13 +55,20 @@ function loadQuestionInterface(response) {
         submitAnswer(null);
       }, 15000);
     }
+  } else {
+    popup.openPopup("error", "Wystąpił błąd", response.data);
   }
 }
-// ETODO: Add copying successful popup
 $(".quiz-container").on(
   "click",
   ".quiz-question-finish-link-copy",
   function () {
     navigator.clipboard.writeText($(".quiz-question-finish-link-link").text());
+    popup.openPopup(
+      "message",
+      "Kopiowanie linku",
+      "Zlecono skopiowanie linku do schowka. W przypadku, gdyby kopiowanie się nie powiodło możesz skopiować link ręcznie.",
+      8
+    );
   }
 );

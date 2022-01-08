@@ -31,6 +31,3 @@ profile_section:
 profile_picture:
   path: /profile/picture
   controller: App\Controller\ProfileController::picture
-profile_refresh:
-  path: /profile/refresh
-  controller: App\Controller\ProfileController::refresh

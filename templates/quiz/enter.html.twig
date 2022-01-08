@@ -1,15 +1,13 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-	{# ETODO: Handle if quizSaved was either found or not #}
 	<section class="quiz-wrapper">
 		<div class="quiz-container">
 			<div class="quiz-intro-container anim-slide-in-up">
-				<h1 class="quiz-h1">Stajesz przed quizem z wiedzy o<br/><span>League of Legends</span>
+				<h1 class="quiz-h1">Stajesz przed Quizem z wiedzy o<br/><span>League of Legends</span>
 				</h1>
 				<p class="quiz-explanation">Przed Tobą 10 pytań. Na każde z nich otrzymasz 15 sekund na odpowiedź. Wiesz jak działają quizy, więc nie będziemy się niepotrzebnie rozdrabniać.</p>
 				<p class="quiz-explanation">Nie zapomnij się zalogować, aby śledzić swoje postępy w różnych grach. Po grze możesz także podzielić się swoim wynikiem ze znajomymi i wyzwać ich na pojedynek.</p>
-				<p class="quiz-explanation">W trakcie quizu nie przechodź w obecnym oknie na inną stronę, gdyż to zresetuje cały quiz!<br/>Powodzenia!</p>
 				{% if quizSaved is defined %}
 					<button class="quiz-start-button otl-box-shadow" data-quiz-saved-token="{{ quizSaved.token }}">Rozpocznij quiz</button>
 				{% else %}
@@ -22,7 +20,7 @@
 {% block javascripts %}
 	<script>
 		const quizStartPath = "{{ path('quiz_start') }}";
-const quizAnswerPath = "{{ path('quiz_answer') }}";
+const quizAnswerPath = "{{ path('quiz_answer') }}";{% if quizSavedNotFound is defined %}popup.openPopup('error', 'Błędny token', "{{ quizSavedNotFoundMessage }}");{% endif %}
 	</script>
 	<script src="{{ asset('js/quiz/quiz.js') }}"></script>
 {% endblock %}

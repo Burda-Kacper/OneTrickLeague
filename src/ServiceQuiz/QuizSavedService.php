@@ -8,7 +8,7 @@ use App\Entity\QuizAnswer;
 use App\Entity\QuizSaved;
 use App\Repository\QuizSavedRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Error\QuizError;
+use App\Message\QuizMessage;
 use App\ServiceCommon\TokenService;
 
 class QuizSavedService
@@ -39,24 +39,31 @@ class QuizSavedService
         ]);
     }
 
-    public function createQuizSaved(Quiz $quiz): string
+    public function assignQuizSavedToQuiz(Quiz $quiz, ?QuizSaved $quizSaved, array $quizUserAnswers): string
     {
-        $token = $this->generateToken();
-        $quizSaved = new QuizSaved;
-        $quizSaved->setToken($token);
-        foreach ($quiz->getUserAnswers() as $answer) {
-            $quizSaved->addQuestion($answer->getQuestion());
+        if (!$quizSaved) {
+            $token = $this->generateToken();
+            $quizSaved = new QuizSaved;
+            $quizSaved->setToken($token);
+            foreach ($quizUserAnswers as $answer) {
+                $quizSaved->addQuestion($answer->getQuestion());
+            }
+            $this->em->persist($quizSaved);
+            $this->em->flush();
         }
-        $this->em->persist($quizSaved);
+
+        $quiz->setQuizSaved($quizSaved);
+        $this->em->persist($quiz);
         $this->em->flush();
-        return $token;
+
+        return $quizSaved->getToken();
     }
 
     public function getQuestionsForQuizSavedToken(string $quizSavedToken): MainResponse
     {
         $quizSaved = $this->getQuizSavedByToken($quizSavedToken);
         if (!$quizSaved) {
-            return new MainResponse(false);
+            return new MainResponse(false, QuizMessage::QUIZ_SAVED_NOT_FOUND);
         }
         $questions = $quizSaved->getQuestions();
         return new MainResponse(true, $questions->toArray());

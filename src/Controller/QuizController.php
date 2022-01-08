@@ -6,7 +6,8 @@ use App\DataStructure\MainResponse;
 use App\Entity\Quiz;
 use App\Entity\QuizUserAnswered;
 use App\ServiceQuiz\QuizService;
-use App\Error\QuizError;
+use App\Message\QuizMessage;
+use App\ServiceProfile\ProfileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +17,12 @@ class QuizController extends AbstractController
 {
 
     private $quizService;
+    private $profileService;
 
-    public function __construct(QuizService $quizService)
+    public function __construct(QuizService $quizService, ProfileService $profileService)
     {
         $this->quizService = $quizService;
+        $this->profileService = $profileService;
     }
 
     public function enter(): Response
@@ -36,7 +39,8 @@ class QuizController extends AbstractController
             ]);
         }
         return $this->render('quiz/enter.html.twig', [
-            'quizSavedNotFound' => true
+            'quizSavedNotFound' => true,
+            'quizSavedNotFoundMessage' => QuizMessage::QUIZ_SAVED_NOT_FOUND
         ]);
     }
 
@@ -45,8 +49,10 @@ class QuizController extends AbstractController
         $quizSavedToken = $request->get("quizSavedToken");
         $user = $this->getUser();
         $ip = $request->getClientIp();
-        //ETODO: Handle start quiz errors
         $response = $this->quizService->startQuiz($ip, $user, $quizSavedToken);
+        if (!$response->getSuccess()) {
+            return new JsonResponse($response->toJsonResponse());
+        }
         $token = $response->getData();
         return $this->getNewQuestion($token);
     }
@@ -66,7 +72,7 @@ class QuizController extends AbstractController
             $response = $this->getFinishQuizResponse($responseData['quiz'], $token);
             return new JsonResponse($response->toJsonResponse());
         }
-        $response = new MainResponse(false, QuizError::QUIZ_UNKNOWN_ERROR);
+        $response = new MainResponse(false, QuizMessage::QUIZ_UNKNOWN_ERROR);
         return new JsonResponse($response->toJsonResponse());
     }
 
@@ -92,9 +98,11 @@ class QuizController extends AbstractController
 
     private function getFinishQuizResponse(Quiz $quiz, string $token): MainResponse
     {
+        $user = $this->getUser();
         $quiz = $this->quizService->finishQuiz($quiz);
         $quizResults = $this->quizService->getQuizResults($quiz);
-        $quizSavedToken = $this->quizService->createQuizSaved($quiz);
+        $quizSavedToken = $quiz->getQuizSaved()->getToken();
+        $this->profileService->refreshResultCache($user);
         return new MainResponse(true, $this->renderView('quiz/_finish.html.twig', [
             'token' => $token,
             'quizResults' => $quizResults,

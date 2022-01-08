@@ -6,8 +6,6 @@
 			<div class="profile-menu-container">
 				<img class="profile-menu-image" src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>
 				<p class="profile-menu-username">{{ app.user.username }}</p>
-				<button class="profile-menu-link profile-menu-reload otl-glass">Odśwież dane</button>
-				<p class="profile-menu-outofsync">Twoje dane mogą być nieaktualne. Możesz je aktualizować raz na 10 minut.</p>
 				<button class="profile-menu-link profile-menu-section otl-glass active" data-section="quiz">Statystyki: Quiz</button>
 				<button class="profile-menu-link profile-menu-section otl-glass" data-section="cross">Statystyki: Krzyżówka</button>
 				<button class="profile-menu-link profile-menu-section otl-glass" data-section="profile">Ustawienia profilu</button>
@@ -21,7 +19,6 @@
 	<script>
 		const profileSectionPath = "{{ path('profile_section') }}";
 const profilePicturePath = "{{ path('profile_picture') }}";
-const profileClearCachePath = "{{ path('profile_refresh') }}";
 	</script>
 	<script src="js/profile/profile.js"></script>
 {% endblock %}

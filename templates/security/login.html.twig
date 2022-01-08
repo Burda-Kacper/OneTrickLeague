@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block content %}
+
 	<div class="login-wrapper">
 		<div class="login-container anim-slide-in-up">
 			<div class="left otl-glass login-card">
@@ -34,4 +35,11 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+{% block javascripts %}
+	{% if error %}
+		<script>
+			popup.openPopup('error', "Błąd", "Podano błędne dane logowania. Spróbuj jeszcze raz.");
+		</script>
+	{% endif %}
 {% endblock %}

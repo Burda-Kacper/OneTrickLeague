@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Error;
+namespace App\Message;
 
-class QuizError
+class QuizMessage
 {
     const QUIZ_TOO_MANY_STARTED = "Zaczynasz zbyt dużo quizów! Odczekaj proszę trochę przed kolejnym.";
     const QUIZ_TOOK_TOO_LONG = "Quiz trwał zbyt długo i został niezaliczony.";

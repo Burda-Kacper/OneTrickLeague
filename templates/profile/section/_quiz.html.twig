@@ -1,86 +1,35 @@
 <div class="profile-stats-container">
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Zakończonych Quizów:</p>
-		<p class="profile-stats-stat">{{ userQuizCache.finishedAmount }}</p>
+			<p class="profile-stats-stat">{{ userQuizCache.finishedAmount }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Średnia punktów:</p>
-		<p class="profile-stats-stat">{{ userQuizCache.averageScore }}</p>
+			<p class="profile-stats-stat">{{ userQuizCache.averageScore }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Poprawne odpowiedzi:</p>
-		<p class="profile-stats-stat">{{ userQuizCache.answerRightAmount }}</p>
+			<p class="profile-stats-stat">{{ userQuizCache.answerRightAmount }}</p>
 	</div>
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Niepoprawne odpowiedzi:</p>
-		<p class="profile-stats-stat">{{ userQuizCache.answerWrongAmount }}</p>
+			<p class="profile-stats-stat">{{ userQuizCache.answerWrongAmount }}</p>
 	</div>
 </div>
-<div class="profile-quiz-history otl-glass anim-slide-in-up">
-	<p class="profile-quiz-history-header">Historia Quizów:</p>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
 
-	<div class="profile-quiz-history-entry">
-		<p class="profile-quiz-history-date">04.12.2021 16:56</p>
-		<p class="profile-quiz-history-points">3/10
-			<i class="fas fa-info-circle"></i>
-		</p>
-	</div>
-	<div class="profile-quiz-history-load">
-		Wczytaj więcej
-		<i class="fas fa-chevron-circle-down"></i>
-	</div>
+<div class="profile-quiz-history otl-glass anim-slide-in-up">
+	<p class="profile-quiz-history-header">Ostatnie Quizy:</p>
+	{% for quiz in userLastQuizes %}
+		<div class="profile-quiz-history-entry">
+			<p class="profile-quiz-history-date">{{ quiz.started|date("d.m.Y H:i") }}</p>
+			<p class="profile-quiz-history-points">Info
+				<i class="fas fa-info-circle"></i>
+			</p>
+		</div>
+	{% endfor %}
+	{% if userLastQuizes|length == 0 %}
+		<div class="profile-quiz-history-empty">
+			Wygląda na to, że pierwszy Quiz dopiero przed Tobą!
+		</div>
+	{% endif %}
 </div>

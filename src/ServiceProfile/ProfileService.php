@@ -5,9 +5,10 @@ namespace App\ServiceProfile;
 use App\DataStructure\MainResponse;
 use App\Entity\QuizResultCache;
 use App\Entity\User;
-use App\Error\ProfileError;
+use App\Message\ProfileMessage;
 use App\Repository\ProfilePictureRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProfileService
@@ -36,12 +37,12 @@ class ProfileService
             'id' => $pictureId
         ]);
         if (!$picture) {
-            return new MainResponse(false, ProfileError::PROFILE_WRONG_PICTURE);
+            return new MainResponse(false, ProfileMessage::PROFILE_WRONG_PICTURE);
         }
 
         $availablePictures = $user->getAvailablePictures();
         if (!in_array($picture, $availablePictures->toArray())) {
-            return new MainResponse(false, ProfileError::PROFILE_UNAVAILABLE_PICTURE);
+            return new MainResponse(false, ProfileMessage::PROFILE_UNAVAILABLE_PICTURE);
         }
         $user->setProfilePicture($picture);
         $this->em->persist($user);
@@ -50,20 +51,13 @@ class ProfileService
         return new MainResponse(true, $picture->getImage());
     }
 
-    public function refreshResultCache(User $user): MainResponse
+    public function refreshResultCache(User $user): void
     {
-        $cachesRebuilt = false;
-        if ($this->profileCacheService->clearQuizResultCache($user)) {
-            $this->profileCacheService->rebuildQuizResultCache($user);
-            $cachesRebuilt = true;
-        }
-        if ($cachesRebuilt) {
-            return new MainResponse(true);
-        }
-        return new MainResponse(false, ProfileError::PROFILE_CACHE_ALREADY_CLEARED);
+        $this->profileCacheService->clearQuizResultCache($user);
+        $this->profileCacheService->rebuildQuizResultCache($user);
     }
 
-    public function getUserQuizCache(User $user): QuizResultCache
+    public function getUserQuizCache(User $user): ?QuizResultCache
     {
         return $this->profileCacheService->getUserQuizCache($user);
     }

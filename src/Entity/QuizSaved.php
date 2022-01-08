@@ -35,10 +35,16 @@ class QuizSaved
      */
     private $questions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Quiz::class, mappedBy="quizSaved", orphanRemoval=true)
+     */
+    private $quizzes;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
         $this->created = new DateTime('now');
+        $this->quizzes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +98,36 @@ class QuizSaved
     {
         if ($this->questions->removeElement($question)) {
             $question->removeQuizSaved($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Quiz[]
+     */
+    public function getQuizzes(): Collection
+    {
+        return $this->quizzes;
+    }
+
+    public function addQuiz(Quiz $quiz): self
+    {
+        if (!$this->quizzes->contains($quiz)) {
+            $this->quizzes[] = $quiz;
+            $quiz->setQuizSaved($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuiz(Quiz $quiz): self
+    {
+        if ($this->quizzes->removeElement($quiz)) {
+            // set the owning side to null (unless already changed)
+            if ($quiz->getQuizSaved() === $this) {
+                $quiz->setQuizSaved(null);
+            }
         }
 
         return $this;

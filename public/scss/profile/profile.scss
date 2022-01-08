@@ -123,7 +123,7 @@
 }
 .profile-quiz-history-points {
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 600;
   cursor: pointer;
   i {
     color: $light-blue;
@@ -179,15 +179,8 @@
     border: 3px solid $light-pink;
   }
 }
-.profile-menu-reload {
-  background-color: $light-pink;
-  text-transform: uppercase;
-  font-weight: 900;
-  &:hover {
-    background-color: $light-pink-hover;
-  }
-}
-.profile-menu-outofsync {
-  font-size: 12px;
-  margin-bottom: 15px;
+.profile-quiz-history-empty {
+  text-align: center;
+  font-weight: 600;
+  color: $light-pink;
 }

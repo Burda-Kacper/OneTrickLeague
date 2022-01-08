@@ -729,7 +729,7 @@ body {
 
 .profile-quiz-history-points {
   font-size: 14px;
-  font-weight: 900;
+  font-weight: 600;
   cursor: pointer; }
   .profile-quiz-history-points i {
     color: #42bfdd;
@@ -779,13 +779,7 @@ body {
   .profile-image-select-entry:hover {
     border: 3px solid #ff66b3; }
 
-.profile-menu-reload {
-  background-color: #ff66b3;
-  text-transform: uppercase;
-  font-weight: 900; }
-  .profile-menu-reload:hover {
-    background-color: #ff88c4; }
-
-.profile-menu-outofsync {
-  font-size: 12px;
-  margin-bottom: 15px; }
+.profile-quiz-history-empty {
+  text-align: center;
+  font-weight: 600;
+  color: #ff66b3; }

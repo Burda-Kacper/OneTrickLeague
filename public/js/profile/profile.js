@@ -1,7 +1,6 @@
 $(".profile-menu-section").on("click", function () {
   loadProfileSection($(this).data("section"));
 });
-//ETODO: Handle errors
 function loadProfileSection(section) {
   $(".profile-menu-section").each(function () {
     $(this).removeClass("active");
@@ -17,14 +16,18 @@ function loadProfileSection(section) {
       section: section,
     },
   }).done(function (response) {
-    $(".profile-data-container").html(response.data);
+    if (response.success) {
+      $(".profile-data-container").html(response.data);
+    } else {
+      popup.openPopup("error", "Wystąpił błąd", response.data, 8);
+    }
   });
 }
 
 $(document).ready(function () {
   loadProfileSection("quiz");
 });
-//ETODO: Handle errors
+
 $(".profile-data-container").on(
   "click",
   ".profile-image-select-entry",
@@ -43,16 +46,9 @@ $(".profile-data-container").on(
           "src",
           "/img/profilePicture/" + response.data
         );
+      } else {
+        popup.openPopup("error", "Wystąpił błąd", response.data, 8);
       }
     });
   }
 );
-$(".profile-menu-reload").on("click", function () {
-  $.ajax({
-    url: profileClearCachePath,
-    method: "POST",
-    dataType: "JSON",
-  }).done(function (response) {
-    console.log(response);
-  });
-});
