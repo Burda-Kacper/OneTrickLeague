@@ -447,7 +447,7 @@ body {
   margin-bottom: 15px; }
 
 .quiz-start-button {
-  margin-top: 20px;
+  margin: 20px auto;
   width: 200px;
   height: 60px;
   font-size: 20px;
@@ -456,7 +456,8 @@ body {
   color: #fff;
   background-color: #ff66b3;
   transition: background-color 0.2s;
-  border: 0; }
+  border: 0;
+  display: block; }
   .quiz-start-button:hover {
     background-color: #ff88c4; }
 
@@ -556,6 +557,26 @@ body {
   transition: background-color 0.2s; }
   .quiz-question-finish-link-copy:hover {
     background-color: #ff88c4; }
+
+.quiz-saved-owner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px; }
+
+.quiz-saved-owner-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-right: 15px; }
+
+.quiz-saved-owner-name {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  max-width: 300px; }
 
 .login-wrapper {
   width: 100%;

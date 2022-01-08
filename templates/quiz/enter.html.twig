@@ -9,9 +9,19 @@
 				<p class="quiz-explanation">Przed Tobą 10 pytań. Na każde z nich otrzymasz 15 sekund na odpowiedź. Wiesz jak działają quizy, więc nie będziemy się niepotrzebnie rozdrabniać.</p>
 				<p class="quiz-explanation">Nie zapomnij się zalogować, aby śledzić swoje postępy w różnych grach. Po grze możesz także podzielić się swoim wynikiem ze znajomymi i wyzwać ich na pojedynek.</p>
 				{% if quizSaved is defined %}
-					<button class="quiz-start-button otl-box-shadow" data-quiz-saved-token="{{ quizSaved.token }}">Rozpocznij quiz</button>
+					<button class="quiz-start-button otl-box-shadow" data-quiz-saved-token="{{ quizSaved.token }}">Rozpocznij Quiz</button>
 				{% else %}
-					<button class="quiz-start-button otl-box-shadow">Rozpocznij quiz</button>
+					<button class="quiz-start-button otl-box-shadow">Rozpocznij Quiz</button>
+				{% endif %}
+				{% if quizSaved is defined and quizSaved.owner.isPublic == true %}
+					<div>
+					{# ETODO: Link to an actual profile - create profile viewing mechanism #}
+						<p>Ten Quiz został utworzony przez:</p>
+						<a href="#" class="quiz-saved-owner-container">
+							<img class="quiz-saved-owner-image" src="{{ asset("img/profilePicture/" ~ quizSaved.owner.profilePicture.image ) }}"/>
+							<p class="quiz-saved-owner-name">{{ quizSaved.owner.username }}</p>
+						</a>
+					</div>
 				{% endif %}
 			</div>
 		</div>

@@ -89,6 +89,9 @@ class ProfileCacheService
     {
         $rightAnswers = 0;
         foreach ($quizUserAnswers as $qua) {
+            if (!$qua->getAnswer()) {
+                continue;
+            }
             if ($qua->getAnswer()->getIsCorrect()) {
                 $rightAnswers++;
             }

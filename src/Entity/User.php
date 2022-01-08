@@ -58,10 +58,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $quizResultCache;
 
+    /**
+     * @ORM\OneToMany(targetEntity=QuizSaved::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $quizSaveds;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublic = true;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
         $this->availablePictures = new ArrayCollection();
+        $this->quizSaveds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +241,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->quizResultCache = $quizResultCache;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuizSaved[]
+     */
+    public function getQuizSaveds(): Collection
+    {
+        return $this->quizSaveds;
+    }
+
+    public function addQuizSaved(QuizSaved $quizSaved): self
+    {
+        if (!$this->quizSaveds->contains($quizSaved)) {
+            $this->quizSaveds[] = $quizSaved;
+            $quizSaved->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizSaved(QuizSaved $quizSaved): self
+    {
+        if ($this->quizSaveds->removeElement($quizSaved)) {
+            // set the owning side to null (unless already changed)
+            if ($quizSaved->getOwner() === $this) {
+                $quizSaved->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIsPublic(): ?bool
+    {
+        return $this->isPublic;
+    }
+
+    public function setIsPublic(bool $isPublic): self
+    {
+        $this->isPublic = $isPublic;
 
         return $this;
     }

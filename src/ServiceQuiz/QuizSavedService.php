@@ -45,6 +45,7 @@ class QuizSavedService
             $token = $this->generateToken();
             $quizSaved = new QuizSaved;
             $quizSaved->setToken($token);
+            $quizSaved->setOwner($quiz->getUser());
             foreach ($quizUserAnswers as $answer) {
                 $quizSaved->addQuestion($answer->getQuestion());
             }

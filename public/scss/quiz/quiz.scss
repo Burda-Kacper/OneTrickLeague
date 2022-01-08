@@ -30,7 +30,7 @@
   margin-bottom: 15px;
 }
 .quiz-start-button {
-  margin-top: 20px;
+  margin: 20px auto;
   width: 200px;
   height: 60px;
   font-size: 20px;
@@ -40,6 +40,7 @@
   background-color: $light-pink;
   transition: background-color 0.2s;
   border: 0;
+  display: block;
   &:hover {
     background-color: $light-pink-hover;
   }
@@ -147,4 +148,24 @@
   &:hover {
     background-color: $light-pink-hover;
   }
+}
+.quiz-saved-owner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+.quiz-saved-owner-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  margin-right: 15px;
+}
+.quiz-saved-owner-name {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  max-width: 300px;
 }

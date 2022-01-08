@@ -40,6 +40,12 @@ class QuizSaved
      */
     private $quizzes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quizSaveds")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -129,6 +135,18 @@ class QuizSaved
                 $quiz->setQuizSaved(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
