@@ -90,9 +90,13 @@ class QuizController extends AbstractController
 
     private function getNextQuestionResponse(QuizUserAnswered $qua, string $token): MainResponse
     {
+        $answers = $qua->getQuestion()->getAnswers()->toArray();
+        shuffle($answers);
+
         return new MainResponse(true, $this->renderView('quiz/_question.html.twig', [
             'qua' => $qua,
-            'token' => $token
+            'token' => $token,
+            'answers' => $answers
         ]));
     }
 
@@ -108,5 +112,15 @@ class QuizController extends AbstractController
             'quizResults' => $quizResults,
             'quizSavedToken' => $quizSavedToken
         ]));
+    }
+
+    public function addQuizQuestion(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        $question = $request->get("question");
+        $answers = $request->get("answers");
+        $response = $this->quizService->addQuizQuestion($user, $question, $answers);
+
+        return new JsonResponse($response->toJsonResponse());
     }
 }

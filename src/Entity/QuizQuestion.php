@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\QuizQuestionRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -39,11 +40,28 @@ class QuizQuestion
      */
     private $quizSaved;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isReviewed = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quizQuestions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
     public function __construct()
     {
         $this->quiz = new ArrayCollection();
         $this->answers = new ArrayCollection();
         $this->quizSaved = new ArrayCollection();
+        $this->created = new DateTime('now');
     }
 
     public function getId(): ?int
@@ -125,6 +143,41 @@ class QuizQuestion
     public function removeQuizSaved(QuizSaved $quizSaved): self
     {
         $this->quizSaved->removeElement($quizSaved);
+
+        return $this;
+    }
+
+    public function getIsReviewed(): ?bool
+    {
+        return $this->isReviewed;
+    }
+
+    public function setIsReviewed(bool $isReviewed): self
+    {
+        $this->isReviewed = $isReviewed;
+
+        return $this;
+    }
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
 
         return $this;
     }

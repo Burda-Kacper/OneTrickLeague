@@ -228,4 +228,16 @@ class QuizService
             'started' => "DESC"
         ], $amount);
     }
+
+    public function addQuizQuestion(User $user, string $question, array $answers): MainResponse
+    {
+        $quizQuestion = $this->quizQuestionService->createQuizQuestion($user, $question);
+        $isAddingAnswersSuccessful = $this->quizAnswerService->createQuizAnswers($quizQuestion, $answers);
+
+        if ($isAddingAnswersSuccessful) {
+            return new MainResponse(true, QuizMessage::QUIZ_NEW_QUESTION_SUCCESS);
+        }
+
+        return new MainResponse(false, QuizMessage::QUIZ_NEW_QUESTION_ERROR);
+    }
 }

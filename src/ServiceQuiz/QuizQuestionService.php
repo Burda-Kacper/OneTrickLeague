@@ -2,13 +2,15 @@
 
 namespace App\ServiceQuiz;
 
+use App\Entity\QuizQuestion;
+use App\Entity\User;
 use App\Repository\QuizQuestionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class QuizQuestionService
 {
-    const QUESTIONS_IN_QUIZ = 3;
-    const QUESTIONS_IDS_BATCH = 10;
+    const QUESTIONS_IN_QUIZ = 10;
+    const QUESTIONS_IDS_BATCH = 20;
 
     private $em;
     private $repo;
@@ -47,5 +49,17 @@ class QuizQuestionService
             return array_slice($questions, 0, $this::QUESTIONS_IN_QUIZ);
         }
         return $questions;
+    }
+
+    public function createQuizQuestion(User $user, string $question): QuizQuestion
+    {
+        $quizQuestion = new QuizQuestion;
+        $quizQuestion->setOwner($user);
+        $quizQuestion->setQuestion($question);
+
+        $this->em->persist($quizQuestion);
+        $this->em->flush();
+
+        return $quizQuestion;
     }
 }

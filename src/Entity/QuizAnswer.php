@@ -36,7 +36,7 @@ class QuizAnswer
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isCorrect;
+    private $isCorrect = false;
 
     public function getId(): ?int
     {

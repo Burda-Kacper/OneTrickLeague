@@ -20,3 +20,5 @@
 ###< phpunit/phpunit ###
 node_modules
 public/img/temp/*
+
+migrations/*

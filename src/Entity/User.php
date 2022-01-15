@@ -68,11 +68,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isPublic = true;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAllowedToAddQuizQuestions = true;
+
+    /**
+     * @ORM\OneToMany(targetEntity=QuizQuestion::class, mappedBy="owner", orphanRemoval=true)
+     */
+    private $quizQuestions;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
         $this->availablePictures = new ArrayCollection();
         $this->quizSaveds = new ArrayCollection();
+        $this->quizQuestions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -283,6 +294,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsPublic(bool $isPublic): self
     {
         $this->isPublic = $isPublic;
+
+        return $this;
+    }
+
+    public function getIsAllowedToAddQuizQuestions(): ?bool
+    {
+        return $this->isAllowedToAddQuizQuestions;
+    }
+
+    public function setIsAllowedToAddQuizQuestions(bool $isAllowedToAddQuizQuestions): self
+    {
+        $this->isAllowedToAddQuizQuestions = $isAllowedToAddQuizQuestions;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|QuizQuestion[]
+     */
+    public function getQuizQuestions(): Collection
+    {
+        return $this->quizQuestions;
+    }
+
+    public function addQuizQuestion(QuizQuestion $quizQuestion): self
+    {
+        if (!$this->quizQuestions->contains($quizQuestion)) {
+            $this->quizQuestions[] = $quizQuestion;
+            $quizQuestion->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuizQuestion(QuizQuestion $quizQuestion): self
+    {
+        if ($this->quizQuestions->removeElement($quizQuestion)) {
+            // set the owning side to null (unless already changed)
+            if ($quizQuestion->getOwner() === $this) {
+                $quizQuestion->setOwner(null);
+            }
+        }
 
         return $this;
     }

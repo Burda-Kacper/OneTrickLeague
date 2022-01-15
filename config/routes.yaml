@@ -21,6 +21,9 @@ quiz_saved_enter:
 quiz_answer:
   path: /quiz/answer
   controller: App\Controller\QuizController::answer
+quiz_add_question:
+  path: /quiz/addQuizQuestion
+  controller: App\Controller\QuizController::addQuizQuestion
 
 profile_main:
   path: /profile

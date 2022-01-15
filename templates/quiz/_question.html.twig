@@ -2,7 +2,7 @@
 	<div class="quiz-question-meta hidden" data-quaid="{{ qua.id }}" data-token="{{ qua.quiz.token }}"></div>
 	<p class="quiz-question-question">{{ qua.question.question }}</p>
 	<div class="quiz-question-answers ">
-		{% for answer in qua.question.answers %}
+		{% for answer in answers %}
 			<button class="quiz-question-answer otl-box-shadow" data-answer-token="{{ answer.answerToken }}">{{ answer.answer }}</button>
 		{% endfor %}
 	</div>

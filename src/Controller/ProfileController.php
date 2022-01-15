@@ -67,7 +67,7 @@ class ProfileController extends AbstractController
 
         return new JsonResponse([
             'success' => true,
-            'data' => $this->renderView('profile/section/_quiz.html.twig', [
+            'data' => $this->renderView('profile/section/quiz/_quiz.html.twig', [
                 'userQuizCache' => $userQuizCache,
                 'userLastQuizes' => $userLastQuizes
             ])
