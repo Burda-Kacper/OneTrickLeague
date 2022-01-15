@@ -180,3 +180,48 @@
   color: #ccc;
   user-select: none;
 }
+@media screen and (max-width: 849px) {
+  .profile-container {
+    display: block;
+    padding: 25px;
+    width: 100%;
+  }
+  .profile-menu-wrapper {
+    width: 100%;
+  }
+  .profile-menu-container {
+    position: relative;
+    max-height: initial;
+    width: 100%;
+  }
+  .profile-menu-image {
+    width: 125px;
+    height: 125px;
+  }
+  .profile-menu-link {
+    width: 200px;
+    margin: 0 auto 10px auto;
+  }
+  .profile-data-container {
+    width: 100%;
+  }
+  .profile-stats-entry {
+    width: 100%;
+    margin-bottom: 20px !important;
+    height: 150px;
+    &:last-of-type {
+      margin-bottom: 0 !important;
+    }
+  }
+  .profile-stats-stat {
+    font-size: 45px;
+    top: 55%;
+  }
+  .profile-image-select-container {
+    max-height: 400px;
+  }
+  .profile-image-select-entry {
+    width: 100px;
+    height: 100px;
+  }
+}
