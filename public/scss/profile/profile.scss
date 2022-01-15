@@ -63,7 +63,6 @@
 .profile-stats-entry {
   width: 290px;
   height: 200px;
-  margin-bottom: 20px;
   padding: 15px;
   display: flex;
   justify-content: flex-start;
@@ -72,17 +71,9 @@
   position: relative;
   opacity: 0;
   animation-fill-mode: forwards;
-  &:nth-of-type(1) {
-    animation-delay: 0s;
-  }
-  &:nth-of-type(2) {
-    animation-delay: 0.4s;
-  }
-  &:nth-of-type(3) {
-    animation-delay: 0.8s;
-  }
-  &:nth-of-type(4) {
-    animation-delay: 1.2s;
+
+  &:first-of-type {
+    margin-bottom: 20px;
   }
 }
 
@@ -95,13 +86,9 @@
   font-weight: 900;
 }
 .profile-quiz-history {
-  animation-delay: 1.6s;
   opacity: 0;
   animation-fill-mode: forwards;
   padding: 15px;
-}
-.profile-quiz-history-header {
-  margin-bottom: 10px;
 }
 .profile-quiz-history-entry {
   display: flex;
@@ -183,4 +170,13 @@
   text-align: center;
   font-weight: 600;
   color: $light-pink;
+}
+.profile-section-text {
+  font-weight: 900;
+  margin: 20px 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ccc;
+  user-select: none;
 }

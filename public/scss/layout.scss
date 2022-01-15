@@ -1,5 +1,6 @@
 body {
   overflow: hidden;
+  width: 100vw;
 }
 .layout-header,
 .layout-footer {
@@ -64,10 +65,15 @@ body {
 }
 .layout-main {
   width: 100%;
-  height: calc(100vh - 105px);
   text-shadow: 0 0 5px #000, 0 0 15px #000;
   color: #fff;
   text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: calc(100vh - 105px);
+  overflow-y: auto;
 }
 .layout-footer {
   width: 100%;
@@ -83,7 +89,7 @@ body {
   }
 }
 .layout-footer-link {
-  color: #ccc;
+  color: #fff;
   font-size: 14px;
   text-decoration: none;
   font-weight: 700;
@@ -116,18 +122,65 @@ body {
   margin-bottom: 2px;
   font-weight: 600;
 }
-.layout-main {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  height: calc(100vh - 105px);
-  overflow-y: auto;
-}
 .layout-header-login-image {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 2px solid #fff;
   margin: -7px 0 2px 0;
+}
+.layout-header-logo-mobile {
+  display: none;
+}
+.layout-footer-mobile-icon {
+  display: none !important;
+}
+@media screen and (max-width: 1099px) {
+  .layout-footer {
+    flex-wrap: wrap;
+    overflow-y: auto;
+    > div {
+      width: 50%;
+      height: 45px;
+      padding: 10px 0;
+      justify-content: center;
+    }
+  }
+  .layout-footer-link {
+    font-size: 12px;
+  }
+  .layout-footer-mobile-icon {
+    display: flex !important;
+    position: absolute;
+    left: 5px;
+    width: 20px !important;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    &.down {
+      top: 0;
+    }
+    &.up {
+      top: 45px;
+    }
+  }
+
+  .layout-header-link {
+    width: 80px;
+  }
+  .layout-header-logo {
+    display: none;
+  }
+  .layout-header-logo-mobile {
+    display: block;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none;
+  }
 }

@@ -7,11 +7,14 @@
 	<header class="layout-header">
 		<nav class="layout-header-main-navigation">
 			<a class="layout-header-logo" href="{{ path('homepage') }}">OneTrickLeague</a>
+			<a class="layout-header-logo-mobile" href="{{ path('homepage') }}">
+				OTL
+			</a>
 			<div class="layout-header-site-navigation">
 				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
 					<i class="fas fa-question"></i>Quiz</a>
-				<a class="layout-header-link" href="{{ path('quiz_enter') }}">
-					<i class="fas fa-align-center"></i>Krzyżówka</a>
+				{# <a class="layout-header-link" href="{{ path('quiz_enter') }}">
+																																									<i class="fas fa-align-center"></i>Krzyżówka</a> #}
 				{% if app.user %}
 					<a class="layout-header-link layout-header-login" href="{{ path('profile_main') }}">
 						<img class="layout-header-login-image" src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>Moje konto
@@ -28,6 +31,12 @@
 		{% block content %}{% endblock %}
 	</main>
 	<footer class="layout-footer">
+		<div class="layout-footer-mobile-icon down">
+			<i class="fas fa-angle-double-down"></i>
+		</div>
+		<div class="layout-footer-mobile-icon up">
+			<i class="fas fa-angle-double-up"></i>
+		</div>
 		<div>
 			<a class="layout-footer-link" href="#">
 				<i class="fas fa-file-alt"></i>Regulamin</a>
@@ -38,7 +47,7 @@
 		</div>
 		<div></div>
 		<div>
-			<p class="layout-footer-note">OneTrickLeague is a fan project created by:</p>
+			<p class="layout-footer-note">A fan project created by:</p>
 			<a class="layout-footer-author" href="https://github.com/Burda-Kacper" target="_blank">
 				<i class="fab fa-github"></i>/Burda-Kacper</a>
 		</div>

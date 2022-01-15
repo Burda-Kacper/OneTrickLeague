@@ -33,6 +33,7 @@
     transform: initial; } }
 
 .anim-slide-out-up-absolute {
+  max-width: calc(100vw - 50px);
   animation-name: anim-slide-out-up-absolute;
   animation-duration: 1s;
   animation-fill-mode: forwards; }
@@ -102,8 +103,6 @@
 .otl-glass {
   background: rgba(0, 0, 0, 0.5);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(5.5px);
-  -webkit-backdrop-filter: blur(5.5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18); }
 
@@ -203,7 +202,8 @@
     transform: scaleY(0); } }
 
 body {
-  overflow: hidden; }
+  overflow: hidden;
+  width: 100vw; }
 
 .layout-header,
 .layout-footer {
@@ -263,10 +263,15 @@ body {
 
 .layout-main {
   width: 100%;
-  height: calc(100vh - 105px);
   text-shadow: 0 0 5px #000, 0 0 15px #000;
   color: #fff;
-  text-align: center; }
+  text-align: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: calc(100vh - 105px);
+  overflow-y: auto; }
 
 .layout-footer {
   width: 100%;
@@ -281,7 +286,7 @@ body {
     width: 25%; }
 
 .layout-footer-link {
-  color: #ccc;
+  color: #fff;
   font-size: 14px;
   text-decoration: none;
   font-weight: 700;
@@ -312,20 +317,57 @@ body {
   margin-bottom: 2px;
   font-weight: 600; }
 
-.layout-main {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  height: calc(100vh - 105px);
-  overflow-y: auto; }
-
 .layout-header-login-image {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   border: 2px solid #fff;
   margin: -7px 0 2px 0; }
+
+.layout-header-logo-mobile {
+  display: none; }
+
+.layout-footer-mobile-icon {
+  display: none !important; }
+
+@media screen and (max-width: 1099px) {
+  .layout-footer {
+    flex-wrap: wrap;
+    overflow-y: auto; }
+    .layout-footer > div {
+      width: 50%;
+      height: 45px;
+      padding: 10px 0;
+      justify-content: center; }
+  .layout-footer-link {
+    font-size: 12px; }
+  .layout-footer-mobile-icon {
+    display: flex !important;
+    position: absolute;
+    left: 5px;
+    width: 20px !important;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer; }
+    .layout-footer-mobile-icon.down {
+      top: 0; }
+    .layout-footer-mobile-icon.up {
+      top: 45px; }
+  .layout-header-link {
+    width: 80px; }
+  .layout-header-logo {
+    display: none; }
+  .layout-header-logo-mobile {
+    display: block;
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none; } }
 
 .homepage-wrapper {
   width: 100%;
@@ -416,6 +458,27 @@ body {
     background-color: #ff66b3;
     box-shadow: 0 0 5px #ff66b3, 0 0 15px #000; }
 
+@media screen and (max-width: 899px) {
+  .homepage-container {
+    width: 100%;
+    padding: 25px;
+    flex-direction: column;
+    align-items: center; }
+    .homepage-container .left,
+    .homepage-container .right {
+      max-width: 100%; }
+    .homepage-container .left {
+      padding: 0; }
+    .homepage-container .right {
+      padding-top: 25px; }
+  .homepage-h1 {
+    font-size: 26px;
+    line-height: 26px;
+    margin-bottom: 10px; }
+    .homepage-h1 span {
+      font-size: 32px;
+      margin-top: 0; } }
+
 .quiz-wrapper {
   width: 100%;
   min-height: 100%;
@@ -485,7 +548,7 @@ body {
   font-weight: 600;
   border: 0;
   transition: background-color 0.2s;
-  padding: 5px 0;
+  padding: 10px;
   text-shadow: 0 0 5px #000, 0 0 15px #000; }
   .quiz-question-answer:hover {
     background-color: #0b66b3; }
@@ -530,7 +593,7 @@ body {
 
 .quiz-question-finish-link-container {
   margin: 35px auto 0 auto;
-  width: 375px;
+  max-width: 375px;
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -578,12 +641,38 @@ body {
   text-decoration: none;
   max-width: 300px; }
 
+.quiz-question-finish-container {
+  max-width: 100%; }
+
+@media screen and (max-width: 649px) {
+  .quiz-container {
+    width: 100%;
+    padding: 0 25px; }
+  .quiz-explanation {
+    width: 100%; }
+  .quiz-question-answers {
+    margin-bottom: 15px; }
+  .quiz-question-answer {
+    width: 100%;
+    margin-bottom: 15px !important;
+    font-size: 16px;
+    min-height: 40px; }
+  .quiz-question-question {
+    margin-bottom: 15px;
+    font-size: 24px; }
+  .quiz-question-finish-score {
+    font-size: 90px;
+    line-height: 90px; }
+    .quiz-question-finish-score span {
+      margin: 0 15px; } }
+
 .login-wrapper {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; }
+  align-items: center;
+  padding: 25px; }
 
 .login-container {
   width: 800px;
@@ -633,6 +722,15 @@ body {
   transition: background-color 0.2s; }
   .login-button:hover {
     background-color: #ff88c4; }
+
+@media screen and (max-width: 849px) {
+  .login-container {
+    flex-wrap: wrap;
+    width: 100%; }
+    .login-container .left {
+      margin-bottom: 25px; }
+  .login-card {
+    width: 100%; } }
 
 .profile-container {
   padding: 25px 0;
@@ -696,7 +794,6 @@ body {
 .profile-stats-entry {
   width: 290px;
   height: 200px;
-  margin-bottom: 20px;
   padding: 15px;
   display: flex;
   justify-content: flex-start;
@@ -705,14 +802,8 @@ body {
   position: relative;
   opacity: 0;
   animation-fill-mode: forwards; }
-  .profile-stats-entry:nth-of-type(1) {
-    animation-delay: 0s; }
-  .profile-stats-entry:nth-of-type(2) {
-    animation-delay: 0.4s; }
-  .profile-stats-entry:nth-of-type(3) {
-    animation-delay: 0.8s; }
-  .profile-stats-entry:nth-of-type(4) {
-    animation-delay: 1.2s; }
+  .profile-stats-entry:first-of-type {
+    margin-bottom: 20px; }
 
 .profile-stats-stat {
   position: absolute;
@@ -723,13 +814,9 @@ body {
   font-weight: 900; }
 
 .profile-quiz-history {
-  animation-delay: 1.6s;
   opacity: 0;
   animation-fill-mode: forwards;
   padding: 15px; }
-
-.profile-quiz-history-header {
-  margin-bottom: 10px; }
 
 .profile-quiz-history-entry {
   display: flex;
@@ -804,3 +891,12 @@ body {
   text-align: center;
   font-weight: 600;
   color: #ff66b3; }
+
+.profile-section-text {
+  font-weight: 900;
+  margin: 20px 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ccc;
+  user-select: none; }

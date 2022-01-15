@@ -27,6 +27,7 @@
   }
 }
 .anim-slide-out-up-absolute {
+  max-width: calc(100vw - 50px);
   animation-name: anim-slide-out-up-absolute;
   animation-duration: 1s;
   animation-fill-mode: forwards;

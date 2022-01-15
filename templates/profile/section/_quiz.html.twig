@@ -1,3 +1,4 @@
+<p class="profile-section-text anim-slide-in-up">Statystyki Quizów:</p>
 <div class="profile-stats-container">
 	<div class="profile-stats-entry otl-glass anim-slide-in-up">
 		<p>Zakończonych Quizów:</p>
@@ -16,9 +17,8 @@
 			<p class="profile-stats-stat">{{ userQuizCache.answerWrongAmount }}</p>
 	</div>
 </div>
-
+<p class="profile-section-text anim-slide-in-up">Ostatnie Quizy:</p>
 <div class="profile-quiz-history otl-glass anim-slide-in-up">
-	<p class="profile-quiz-history-header">Ostatnie Quizy:</p>
 	{% for quiz in userLastQuizes %}
 		<div class="profile-quiz-history-entry">
 			<p class="profile-quiz-history-date">{{ quiz.started|date("d.m.Y H:i") }}</p>
@@ -33,3 +33,4 @@
 		</div>
 	{% endif %}
 </div>
+<p class="profile-section-text anim-slide-in-up">Dodaj swoje pytanie:</p>
