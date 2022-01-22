@@ -104,3 +104,26 @@ $(".profile-data-container").on(
     });
   }
 );
+
+$(".profile-data-container").on("click", "#submit-password", function () {
+  const passwords = {
+    old: $("#old-password").val(),
+    new: $("#new-password").val(),
+    repeat: $("#repeat-password").val(),
+  };
+
+  $.ajax({
+    url: profileChangePasswordPath,
+    method: "POST",
+    dataType: "JSON",
+    data: {
+      passwords: passwords,
+    },
+  }).done(function (response) {
+    if (response.success) {
+      popup.openPopup("success", "Sukces", response.data, 8);
+    } else {
+      popup.openPopup("error", "Wystąpił błąd", response.data, 8);
+    }
+  });
+});

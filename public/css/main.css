@@ -106,6 +106,9 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18); }
 
+.mb-15 {
+  margin-bottom: 15px; }
+
 .popup-wrapper {
   position: fixed;
   bottom: 25px;
@@ -986,3 +989,6 @@ body {
     margin-bottom: 15px; }
   .profile-quiz-add-submit {
     margin-top: 15px; } }
+
+.profile-password-container {
+  padding: 15px; }

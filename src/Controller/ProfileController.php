@@ -53,7 +53,7 @@ class ProfileController extends AbstractController
         $availablePictures = $user->getAvailablePictures();
         return new JsonResponse([
             'success' => true,
-            'data' => $this->renderView('profile/section/_profile.html.twig', [
+            'data' => $this->renderView('profile/section/profile/_profile.html.twig', [
                 'availablePictures' => $availablePictures
             ])
         ]);
@@ -79,6 +79,14 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
         $pictureId = $request->get("pictureId");
         $response = $this->profileService->setProfilePicture($user, intval($pictureId));
+        return new JsonResponse($response->toJsonResponse());
+    }
+
+    public function password(Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        $passwords = $request->get("passwords");
+        $response = $this->profileService->changePassword($user, $passwords);
         return new JsonResponse($response->toJsonResponse());
     }
 }
