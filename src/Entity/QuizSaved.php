@@ -42,7 +42,7 @@ class QuizSaved
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="quizSaveds")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $owner;
 

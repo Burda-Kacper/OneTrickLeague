@@ -51,10 +51,12 @@ class ProfileService
         return new MainResponse(true, $picture->getImage());
     }
 
-    public function refreshResultCache(User $user): void
+    public function refreshResultCache(?User $user): void
     {
-        $this->profileCacheService->clearQuizResultCache($user);
-        $this->profileCacheService->rebuildQuizResultCache($user);
+        if ($user) {
+            $this->profileCacheService->clearQuizResultCache($user);
+            $this->profileCacheService->rebuildQuizResultCache($user);
+        }
     }
 
     public function getUserQuizCache(User $user): ?QuizResultCache

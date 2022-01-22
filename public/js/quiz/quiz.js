@@ -27,6 +27,10 @@ $(".quiz-start-button").on("click", function () {
   });
 });
 $(".quiz-container").on("click", ".quiz-question-answer", function () {
+  if ($(".quiz-container").data("disabled") === "disabled") {
+    return;
+  }
+  $(".quiz-container").data("disabled", "disabled");
   clearTimeout(autoResponseTimeout);
   submitAnswer($(this).data("answer-token"));
 });
@@ -51,6 +55,7 @@ function loadQuestionInterface(response) {
   if (response.success) {
     $(".quiz-container").html(response.data);
     if ($(".quiz-question-container").length > 0) {
+      $(".quiz-container").data("disabled", "");
       autoResponseTimeout = setTimeout(function () {
         submitAnswer(null);
       }, 15000);
