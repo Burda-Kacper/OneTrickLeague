@@ -1,0 +1,9 @@
+{% extends 'administration/layout.html.twig' %}
+
+{% block aBreadcrumbs %}
+	<a href="{{ path('administration_dashboard') }}" class="a-breadcrumb">Dashboard</a>
+{% endblock %}
+
+{% block aTitle %}Witaj,
+	{{ app.user.username }}!
+{% endblock %}

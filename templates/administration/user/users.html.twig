@@ -1,0 +1,42 @@
+{% extends 'administration/layout.html.twig' %}
+
+{% block aBreadcrumbs %}
+	<a href="{{ path('administration_users') }}" class="a-breadcrumb">Użytkownicy</a>
+{% endblock %}
+
+{% block aTitle %}Użytkownicy
+{% endblock %}
+
+{% block aContent %}
+	<div class="row head">
+		<div class="tab tab-40">Nazwa użytkownika</div>
+		<div class="tab tab-15">Ostatni login</div>
+		<div class="tab tab-15">Rejestracja</div>
+		<div class="tab tab-15">Szczegóły</div>
+	</div>
+	{# ETODO: Move this to another file, implement search, filtering and sorting #}
+	{% for user in users %}
+		<div class="row a-users-list-tab">
+			<div class="tab tab-40 a-users-list-username">
+				{{ include('_profilePhoto.html.twig', {
+                    ppClass: 'a-users-list-photo',
+                    ppUser: user
+                }) }}
+				{{ user.username }}
+			</div>
+			<div class="tab tab-15">
+				{% if user.lastLogin is not null %}
+					{{ user.lastLogin|date("d-m-Y H:i") }}
+				{% else %}
+					-
+				{% endif %}
+			</div>
+			<div class="tab tab-15">{{ user.registered|date("d-m-Y H:i") }}</div>
+			<div class="tab tab-15">
+				<i class="fas fa-info-circle"></i>
+			</div>
+		</div>
+	{% endfor %}
+
+
+{% endblock %}

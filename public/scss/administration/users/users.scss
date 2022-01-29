@@ -1,0 +1,12 @@
+.a-users-list-username {
+  display: flex;
+  align-items: center;
+}
+.a-users-list-photo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  object-fit: cover;
+  margin-right: 10px;
+}

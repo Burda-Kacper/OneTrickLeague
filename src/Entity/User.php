@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -78,12 +79,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $quizQuestions;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLogin;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $registered;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
         $this->availablePictures = new ArrayCollection();
         $this->quizSaveds = new ArrayCollection();
         $this->quizQuestions = new ArrayCollection();
+        $this->registered = new DateTime('now');
     }
 
     public function getId(): ?int
@@ -336,6 +348,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $quizQuestion->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTimeInterface
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    {
+        $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    public function getRegistered(): ?\DateTimeInterface
+    {
+        return $this->registered;
+    }
+
+    public function setRegistered(?\DateTimeInterface $registered): self
+    {
+        $this->registered = $registered;
 
         return $this;
     }

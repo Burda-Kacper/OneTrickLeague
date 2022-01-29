@@ -37,3 +37,10 @@ profile_picture:
 profile_password:
   path: /profile/password
   controller: App\Controller\ProfileController::password
+
+administration_dashboard:
+  path: /administration
+  controller: App\Administration\Controller\DashboardController::dashboard
+administration_users:
+  path: /administration/users
+  controller: App\Administration\Controller\UserController::users

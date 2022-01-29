@@ -8,12 +8,16 @@
 .hidden {
   display: none !important;
 }
+// ETODO: Separate administration styles and include them only on administration pages
 @import "components/variables";
 @import "components/animations";
 @import "components/components";
 @import "components/popup";
+@import "components/table";
 @import "layout";
+@import "administration/layout";
 @import "homepage/homepage";
 @import "quiz/quiz";
 @import "login/login";
 @import "profile/profile";
+@import "administration/users/users";
