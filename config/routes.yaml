@@ -44,3 +44,6 @@ administration_dashboard:
 administration_users:
   path: /administration/users
   controller: App\Administration\Controller\UserController::users
+administration_users_entries:
+  path: /administration/users/entries
+  controller: App\Administration\Controller\UserController::usersEntries

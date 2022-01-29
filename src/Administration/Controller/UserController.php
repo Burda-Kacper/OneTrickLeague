@@ -4,6 +4,8 @@ namespace App\Administration\Controller;
 
 use App\Administration\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends AbstractController
@@ -17,9 +19,33 @@ class UserController extends AbstractController
 
     public function users(): Response
     {
-        $users = $this->userService->getUsersByParams();
-        return $this->render('administration/user/users.html.twig', [
-            'users' => $users
+        return $this->render('administration/user/users.html.twig');
+    }
+
+    public function usersEntries(Request $request): JsonResponse
+    {
+        $username = $request->get('username');
+        $amount = $request->get('amount');
+        $page = $request->get('page');
+        $sort = [
+            'field' => $request->get("sort")['field'],
+            'order' => $request->get("sort")['order']
+        ];
+        $users = $this->userService->getUsersByParams([
+            'username' =>  [
+                'clausule' => 'LIKE',
+                'value' => "%" . $username . "%"
+            ]
+        ], [
+            'field' => $sort['field'],
+            'order' => $sort['order']
+        ], $amount, $page);
+
+        return new JsonResponse([
+            'success' => true,
+            'template' => $this->renderView('administration/user/_usersTable.html.twig', [
+                'users' => $users
+            ])
         ]);
     }
 }

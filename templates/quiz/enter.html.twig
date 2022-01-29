@@ -1,5 +1,8 @@
 {% extends 'layout.html.twig' %}
 
+{% block title %}Rozpocznij Quiz
+{% endblock %}
+
 {% block content %}
 	<section class="quiz-wrapper">
 		<div class="quiz-container">
@@ -15,7 +18,7 @@
 				{% endif %}
 				{% if quizSaved is defined and quizSaved.owner.isPublic == true %}
 					<div>
-					{# ETODO: Link to an actual profile - create profile viewing mechanism #}
+						{# ETODO: Link to an actual profile - create profile viewing mechanism #}
 						<p>Ten Quiz został utworzony przez:</p>
 						<a href="#" class="quiz-saved-owner-container">
 							<img class="quiz-saved-owner-image" src="{{ asset("img/profilePicture/" ~ quizSaved.owner.profilePicture.image ) }}"/>

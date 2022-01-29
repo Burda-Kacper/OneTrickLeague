@@ -106,8 +106,14 @@
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18); }
 
+.mb-10 {
+  margin-bottom: 10px; }
+
 .mb-15 {
   margin-bottom: 15px; }
+
+.mb-30 {
+  margin-bottom: 30px; }
 
 .popup-wrapper {
   position: fixed;
@@ -215,7 +221,6 @@
     font-size: 14px;
     text-transform: uppercase;
     color: #aaa;
-    cursor: pointer;
     user-select: none; }
     .row.head .tab {
       padding: 7px 3px; }
@@ -496,6 +501,73 @@ body {
 .a-content {
   width: calc(100% - 300px);
   padding-bottom: 25px; }
+
+.a-action-header {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #42bfdd;
+  margin-bottom: 12px; }
+
+.a-action-input {
+  width: 100%;
+  height: 42px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 10px;
+  background-color: #374151;
+  border: 0;
+  color: #fff;
+  outline: none; }
+  .a-action-input::placeholder {
+    color: #aaa; }
+
+.a-action-buttons {
+  display: flex;
+  justify-content: space-between; }
+  .a-action-buttons button {
+    height: 42px;
+    background-color: #374151;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s; }
+    .a-action-buttons button.active {
+      background-color: #42bfdd; }
+    .a-action-buttons button:hover {
+      background-color: #349fb9; }
+
+.a-action-button-3 {
+  width: calc((100% / 3) - 5px); }
+
+.a-action-confirm {
+  width: 100%;
+  height: 42px;
+  text-transform: uppercase;
+  border: 0;
+  background-color: #7d1d3f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s; }
+  .a-action-confirm:hover {
+    background-color: #a13158; }
+
+.a-action-sort-container {
+  display: flex;
+  justify-content: space-between; }
+  .a-action-sort-container select {
+    height: 42px;
+    padding: 0 5px;
+    outline: none; }
+
+.a-action-sort-field {
+  width: calc(60% - 7px); }
+
+.a-action-sort-order {
+  width: 40%; }
 
 .homepage-wrapper {
   width: 100%;
@@ -1129,3 +1201,8 @@ body {
   border: 1px solid #fff;
   object-fit: cover;
   margin-right: 10px; }
+
+.a-users-list-details {
+  color: #fff;
+  padding: 3px 30px;
+  display: inline-block; }

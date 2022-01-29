@@ -19,9 +19,9 @@ class UserService
         $this->em = $em;
     }
 
-    public function getUsersByParams(array $criteria = [], array $orderBy = [], int $limit = null, int $offset = null): array
+    public function getUsersByParams(array $criteria, array $orderBy, int $limit, int $offset): array
     {
-        return $this->repo->findBy(
+        return $this->repo->getUsersByParams(
             $criteria,
             $orderBy,
             $limit,

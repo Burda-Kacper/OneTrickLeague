@@ -36,6 +36,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function getUsersByParams(array $criteria, array $orderBy, int $limit, int $offset): array
+    {
+        $qb = $this->createQueryBuilder('u');
+        foreach ($criteria as $key => $data) {
+            $qb->andWhere("u." . $key . " " . $data['clausule'] . " :value");
+            $qb->setParameter("value", $data['value']);
+        }
+        $qb->orderBy("u." . $orderBy['field'], $orderBy['order']);
+        $qb->setFirstResult($offset * $limit);
+        $qb->setMaxResults($limit);
+        return $qb->getQuery()->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
