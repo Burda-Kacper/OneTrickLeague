@@ -16,11 +16,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class QuizRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Quiz::class);
     }
 
+    /**
+     * @param string $ip
+     * @param DateTime $datetime
+     *
+     * @return int
+     */
     public function getQuizesCountByIpAndDatetime(string $ip, DateTime $datetime): int
     {
         $qb = $this->createQueryBuilder('quiz')
@@ -32,6 +41,11 @@ class QuizRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0]['count'];
     }
 
+    /**
+     * @param User $user
+     *
+     * @return array
+     */
     public function getQuizCacheInfoForUser(User $user): array
     {
         $qb = $this->createQueryBuilder('q')

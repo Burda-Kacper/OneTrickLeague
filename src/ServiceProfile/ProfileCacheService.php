@@ -16,30 +16,57 @@ class ProfileCacheService
     //ETODO: Move this into the backend
     const CACHE_LIFETIME = "-10 minutes";
 
-    private $em;
-    private $quizResultCacheRepo;
-    private $quizRepository;
+    /**
+     * @var EntityManagerInterface $em
+     */
+    private EntityManagerInterface $em;
 
+    /**
+     * @var QuizResultCacheRepository $quizResultCacheRepo
+     */
+    private QuizResultCacheRepository $quizResultCacheRepo;
 
+    /**
+     * @var QuizRepository $quizRepository
+     */
+    private QuizRepository $quizRepository;
+
+    /**
+     * @param EntityManagerInterface $em
+     * @param QuizResultCacheRepository $quizResultCacheRepository
+     * @param QuizRepository $quizRepository
+     */
     public function __construct(
-        EntityManagerInterface $em,
+        EntityManagerInterface    $em,
         QuizResultCacheRepository $quizResultCacheRepository,
-        QuizRepository $quizRepository
-    ) {
+        QuizRepository            $quizRepository
+    )
+    {
         $this->quizResultCacheRepo = $quizResultCacheRepository;
         $this->em = $em;
         $this->quizRepository = $quizRepository;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
     public function clearQuizResultCache(User $user): void
     {
         $quizResultCache = $this->getUserQuizCache($user);
+
         if ($quizResultCache) {
             $this->em->remove($quizResultCache);
             $this->em->flush();
         }
     }
 
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
     public function rebuildQuizResultCache(User $user): void
     {
         $quizResultCache = new QuizResultCache;
@@ -71,34 +98,59 @@ class ProfileCacheService
         $this->em->flush();
     }
 
+    /**
+     * @param array $quizesInfo
+     *
+     * @return int
+     */
     private function getQuizFinishedAmount(array $quizesInfo): int
     {
         return count($quizesInfo);
     }
 
+    /**
+     * @param array $quizesInfo
+     *
+     * @return array
+     */
     private function getQuizUserAnswers(array $quizesInfo): array
     {
         $userAnswers = [];
+
         foreach ($quizesInfo as $quizInfo) {
             $userAnswers = array_merge($userAnswers, $quizInfo->getUserAnswers()->toArray());
         }
+
         return $userAnswers;
     }
 
+    /**
+     * @param array $quizUserAnswers
+     *
+     * @return int
+     */
     private function getQuizAnswerRightAmount(array $quizUserAnswers): int
     {
         $rightAnswers = 0;
+
         foreach ($quizUserAnswers as $qua) {
             if (!$qua->getAnswer()) {
                 continue;
             }
+
             if ($qua->getAnswer()->getIsCorrect()) {
                 $rightAnswers++;
             }
         }
+
         return $rightAnswers;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return QuizResultCache|null
+     */
     public function getUserQuizCache(User $user): ?QuizResultCache
     {
         return $this->quizResultCacheRepo->findOneBy([

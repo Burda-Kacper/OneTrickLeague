@@ -5,41 +5,43 @@
 
 {% block content %}
 
-	<div class="login-wrapper">
-		<div class="login-container anim-slide-in-up">
-			<div class="left otl-glass login-card">
-				<form method="post">
-					<p class="login-header">Zaloguj się</p>
-					<label class="login-label" for="inputUsername">Login</label>
-					<input type="text" name="username" id="inputUsername" class="login-input" autocomplete="username" autofocus>
-					<label class="login-label" for="inputPassword">Hasło</label>
-					<input type="password" name="password" id="inputPassword" class="login-input">
+    <div class="login-wrapper">
+        <div class="login-container anim-slide-in-up">
+            <div class="left otl-glass login-card">
+                <form method="post">
+                    <p class="login-header">Zaloguj się</p>
+                    <label class="login-label" for="inputUsername">Login</label>
+                    <input type="text" name="username" id="inputUsername" class="login-input" autocomplete="username"
+                           autofocus>
+                    <label class="login-label" for="inputPassword">Hasło</label>
+                    <input type="password" name="password" id="inputPassword" class="login-input">
 
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					<button class="login-button" type="submit">
-						Zaloguj się
-					</button>
-				</form>
-			</div>
-			<div class="right otl-glass login-card">
-				<p class="login-header">Załóż darmowe konto</p>
-				<label class="login-label" for="registerUsername">Login</label>
-				<input type="text" name="registerUsername" id="registerUsername" class="login-input" autocomplete="username">
-				<label class="login-label" for="registerPassword">Hasło</label>
-				<input type="password" name="registerPassword" id="registerPassword" class="login-input">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <button class="login-button" type="submit">
+                        Zaloguj się
+                    </button>
+                </form>
+            </div>
+            <div class="right otl-glass login-card">
+                <p class="login-header">Załóż darmowe konto</p>
+                <label class="login-label" for="registerUsername">Login</label>
+                <input type="text" name="registerUsername" id="registerUsername" class="login-input"
+                       autocomplete="username">
+                <label class="login-label" for="registerPassword">Hasło</label>
+                <input type="password" name="registerPassword" id="registerPassword" class="login-input">
 
-				<button class="login-button">
-					Zarejestruj się
-				</button>
+                <button class="login-button">
+                    Zarejestruj się
+                </button>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
-	{% if error %}
-		<script>
-			popup.openPopup('error', "Błąd", "Podano błędne dane logowania. Spróbuj jeszcze raz.");
-		</script>
-	{% endif %}
+    {% if error %}
+        <script>
+            popup.openPopup('error', "Błąd", "Podano błędne dane logowania. Spróbuj jeszcze raz.");
+        </script>
+    {% endif %}
 {% endblock %}

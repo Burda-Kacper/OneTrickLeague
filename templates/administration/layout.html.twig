@@ -1,48 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="popup-wrapper">
-		<div class="popup-container"></div>
-	</div>
-	<main class="a-layout-main">
-		<div class="left">
-			<a class="a-menu-logo" href="{{ path('administration_dashboard') }}">
-				OTL
-			</a>
-			<a href="{{ path('administration_users') }}" class="a-menu-button">
-				<i class="fas fa-users"></i>
-			</a>
-			<a href="#" class="a-menu-button">
-				<i class="fas fa-question"></i>
-			</a>
-			<a class="a-menu-button" href="{{ path('logout') }}">
-				<i class="fas fa-power-off"></i>
-			</a>
-		</div>
-		<div class="right">
-			<div class="a-breadcrumbs">
-				{% block aBreadcrumbs %}{# <a href="#" class="a-breadcrumb">Użytkownicy</a>#}
-					{#<div class="a-breadcrumb-arrow">Użytkownicy</div> #}
-				{% endblock %}
-			</div>
-			<p class="a-header">
-				{% block aTitle %}
-					{#Użytkownicy#}
-				{% endblock %}
-			</p>
-			<div class="a-main">
-				<div class="a-content">
-					{% block aContent %}{% endblock %}
-				</div>
-			</div>
-		</div>
-	</main>
-	<div class="a-actions">
-		{% block aActions %}{% endblock %}
-	</div>
+    <div class="popup-wrapper">
+        <div class="popup-container"></div>
+    </div>
+    <main class="a-layout-main">
+        <div class="left">
+            <a class="a-menu-logo" href="{{ path('administration_dashboard') }}">
+                OTL
+            </a>
+            <a href="{{ path('administration_users') }}" class="a-menu-button">
+                <i class="fas fa-users"></i>
+            </a>
+            <a href="#" class="a-menu-button">
+                <i class="fas fa-question"></i>
+            </a>
+            <a class="a-menu-button" href="{{ path('logout') }}">
+                <i class="fas fa-power-off"></i>
+            </a>
+        </div>
+        <div class="right">
+            <div class="a-breadcrumbs">
+                {% block aBreadcrumbs %}{# <a href="#" class="a-breadcrumb">Użytkownicy</a> #}
+                    {# <div class="a-breadcrumb-arrow">Użytkownicy</div> #}
+                {% endblock %}
+            </div>
+            <p class="a-header">
+                {% block aTitle %}
+                    {# Użytkownicy #}
+                {% endblock %}
+            </p>
+            <div class="a-main">
+                <div class="a-content">
+                    {% block aContent %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="a-actions">
+        {% block aActions %}{% endblock %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
-	<script src="{{ asset('js/administration/layout.js') }}"></script>
-	{% block aJavascripts %}{% endblock %}
+    <script src="{{ asset('js/administration/layout.js') }}"></script>
+    {% block aJavascripts %}{% endblock %}
 {% endblock %}

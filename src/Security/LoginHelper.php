@@ -9,14 +9,24 @@ use Doctrine\ORM\EntityManagerInterface;
 class LoginHelper
 {
 
-    private $em;
+    /**
+     * @var EntityManagerInterface $em
+     */
+    private EntityManagerInterface $em;
 
-    public function __construct(
-        EntityManagerInterface $em,
-    ) {
+    /**
+     * @param EntityManagerInterface $em
+     */
+    public function __construct(EntityManagerInterface $em)
+    {
         $this->em = $em;
     }
 
+    /**
+     * @param User $user
+     *
+     * @return void
+     */
     public function setLastLogin(User $user): void
     {
         $user->setLastLogin(new DateTime('now'));

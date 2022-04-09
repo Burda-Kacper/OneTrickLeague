@@ -5,6 +5,7 @@
   display: flex;
   justify-content: flex-end;
   overflow-y: auto;
+
   .left {
     position: fixed;
     top: 0;
@@ -14,6 +15,7 @@
     height: 100%;
     border-right: 1px solid $light-grey;
   }
+
   .right {
     width: calc(100% - 75px);
     padding: 25px;
@@ -33,10 +35,12 @@
   font-size: 20px;
   transition: color 0.2s;
   text-decoration: none;
+
   &:hover {
     color: $light-blue-hover;
   }
 }
+
 .a-menu-logo {
   width: 100%;
   height: 60px;
@@ -49,14 +53,17 @@
   font-size: 26px;
   background-color: $dark-blue;
 }
+
 .a-header {
   font-size: 36px;
   font-weight: 700;
   margin-bottom: 30px;
 }
+
 .a-breadcrumbs {
   margin-top: -10px;
 }
+
 .a-breadcrumb {
   color: #aaa;
   font-weight: 700;
@@ -64,6 +71,7 @@
   font-size: 14px;
   text-transform: uppercase;
 }
+
 .a-breadcrumb-arrow {
   width: 30px;
   font-size: 20px;
@@ -74,11 +82,13 @@
   text-align: center;
   color: #aaa;
 }
+
 .a-main {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
+
 .a-actions {
   width: 300px;
   padding: 25px;
@@ -90,17 +100,21 @@
   background-color: #111827;
   color: #fff;
 }
+
 .a-content {
   width: calc(100% - 300px);
   padding-bottom: 25px;
 }
+
 .a-action-header {
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 700;
   color: $light-blue;
   margin-bottom: 12px;
+  display: block;
 }
+
 .a-action-input {
   width: 100%;
   height: 42px;
@@ -111,13 +125,16 @@
   border: 0;
   color: #fff;
   outline: none;
+
   &::placeholder {
     color: #aaa;
   }
 }
+
 .a-action-buttons {
   display: flex;
   justify-content: space-between;
+
   button {
     height: 42px;
     background-color: $light-grey;
@@ -130,14 +147,17 @@
     &.active {
       background-color: $light-blue;
     }
+
     &:hover {
       background-color: $light-blue-hover;
     }
   }
 }
+
 .a-action-button-3 {
   width: calc((100% / 3) - 5px);
 }
+
 .a-action-confirm {
   width: 100%;
   height: 42px;
@@ -149,22 +169,27 @@
   font-size: 14px;
   cursor: pointer;
   transition: background-color 0.2s;
+
   &:hover {
     background-color: $dark-pink-hover;
   }
 }
+
 .a-action-sort-container {
   display: flex;
   justify-content: space-between;
+
   select {
     height: 42px;
     padding: 0 5px;
     outline: none;
   }
 }
+
 .a-action-sort-field {
   width: calc(60% - 7px);
 }
+
 .a-action-sort-order {
   width: 40%;
 }

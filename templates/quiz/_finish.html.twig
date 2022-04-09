@@ -1,20 +1,21 @@
 <div class="quiz-question-finish-container anim-slide-in-up">
-	<p class="quiz-question-finish-header">To już koniec quizu!</p>
-	<p class="quiz-question-finish-drumroll">Udało Ci się uzyskać wynik...</p>
-	<p class="quiz-question-finish-score">
-		{{ quizResults.score }}<span>/</span>{##}{{ quizResults.maxScore }}
-	</p>
-	<p class="quiz-question-finish-cheer">{{ quizResults.cheer }}</p>
-	<div class="quiz-question-finish-share-container otl-glass">
-		<p>Poniższy link pozwoli na rozwiązanie dokładnie tego samego Quizu co Twój, będzie on również dostępny w Twojej historii Quizów. Podziel się nim ze znajomymi i porównajcie swoje wyniki!
-		</p>
-		<div class="quiz-question-finish-link-container">
-			<div class="quiz-question-finish-link-link">
-				{{ url('quiz_saved_enter', {quizSavedToken: quizSavedToken}) }}
-			</div>
-			<div class="quiz-question-finish-link-copy">
-				<i class="fas fa-copy"></i>
-			</div>
-		</div>
-	</div>
+    <p class="quiz-question-finish-header">To już koniec quizu!</p>
+    <p class="quiz-question-finish-drumroll">Udało Ci się uzyskać wynik...</p>
+    <p class="quiz-question-finish-score">
+        {{ quizResults.score }}<span>/</span>{# #}{{ quizResults.maxScore }}
+    </p>
+    <p class="quiz-question-finish-cheer">{{ quizResults.cheer }}</p>
+    <div class="quiz-question-finish-share-container otl-glass">
+        <p>Poniższy link pozwoli na rozwiązanie dokładnie tego samego Quizu co Twój, będzie on również dostępny w Twojej
+            historii Quizów. Podziel się nim ze znajomymi i porównajcie swoje wyniki!
+        </p>
+        <div class="quiz-question-finish-link-container">
+            <div class="quiz-question-finish-link-link">
+                {{ url('quiz_saved_enter', {quizSavedToken: quizSavedToken}) }}
+            </div>
+            <div class="quiz-question-finish-link-copy">
+                <i class="fas fa-copy"></i>
+            </div>
+        </div>
+    </div>
 </div>

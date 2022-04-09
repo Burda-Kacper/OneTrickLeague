@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -17,13 +19,23 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
+
     /**
-     * Used to upgrade (rehash) the user's password automatically over time.
+     * @param PasswordAuthenticatedUserInterface $user
+     * @param string $newHashedPassword
+     *
+     * @return void
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
@@ -36,16 +48,27 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * @param array $criteria
+     * @param array $orderBy
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return array
+     */
     public function getUsersByParams(array $criteria, array $orderBy, int $limit, int $offset): array
     {
         $qb = $this->createQueryBuilder('u');
+
         foreach ($criteria as $key => $data) {
             $qb->andWhere("u." . $key . " " . $data['clausule'] . " :value");
             $qb->setParameter("value", $data['value']);
         }
+
         $qb->orderBy("u." . $orderBy['field'], $orderBy['order']);
         $qb->setFirstResult($offset * $limit);
         $qb->setMaxResults($limit);
+        
         return $qb->getQuery()->getResult();
     }
 

@@ -399,7 +399,6 @@ body {
   .layout-header-logo {
     display: none; }
   .layout-header-logo-mobile {
-    display: block;
     width: 80px;
     height: 100%;
     display: flex;
@@ -507,7 +506,8 @@ body {
   text-transform: uppercase;
   font-weight: 700;
   color: #42bfdd;
-  margin-bottom: 12px; }
+  margin-bottom: 12px;
+  display: block; }
 
 .a-action-input {
   width: 100%;
@@ -891,7 +891,6 @@ body {
 
 .login-label {
   font-weight: 700;
-  margin-bottom: 3px;
   display: block;
   margin-bottom: 10px; }
 

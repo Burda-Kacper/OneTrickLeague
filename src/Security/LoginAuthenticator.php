@@ -2,7 +2,6 @@
 
 namespace App\Security;
 
-use App\Security\LoginHelper;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,15 +22,31 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'login';
 
+    /**
+     * @var UrlGeneratorInterface $urlGenerator
+     */
     private UrlGeneratorInterface $urlGenerator;
+
+    /**
+     * @var LoginHelper $loginHelper
+     */
     private LoginHelper $loginHelper;
 
+    /**
+     * @param UrlGeneratorInterface $urlGenerator
+     * @param LoginHelper $loginHelper
+     */
     public function __construct(UrlGeneratorInterface $urlGenerator, LoginHelper $loginHelper)
     {
         $this->urlGenerator = $urlGenerator;
         $this->loginHelper = $loginHelper;
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return PassportInterface
+     */
     public function authenticate(Request $request): PassportInterface
     {
         $username = $request->request->get('username', '');
@@ -47,6 +62,13 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    /**
+     * @param Request $request
+     * @param TokenInterface $token
+     * @param string $firewallName
+     *
+     * @return Response|null
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         $this->loginHelper->setLastLogin($token->getUser());
@@ -58,6 +80,11 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('homepage'));
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

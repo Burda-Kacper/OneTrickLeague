@@ -2,12 +2,14 @@ body {
   overflow: hidden;
   width: 100vw;
 }
+
 .layout-header,
 .layout-footer {
   position: relative;
   z-index: 1;
   box-shadow: 0 0 10px #000, 0 0 20px #000;
 }
+
 .layout-header-main-navigation {
   display: flex;
   justify-content: space-between;
@@ -16,11 +18,13 @@ body {
   height: 60px;
   color: #fff;
 }
+
 .layout-header-site-navigation {
   display: flex;
   align-items: center;
   height: 100%;
 }
+
 .layout-header-logo {
   font-size: 30px;
   font-weight: 900;
@@ -28,6 +32,7 @@ body {
   color: #fff;
   padding: 10px 15px;
 }
+
 .layout-header-link {
   color: #fff;
   text-decoration: none;
@@ -53,16 +58,20 @@ body {
     justify-content: center;
     align-items: center;
   }
+
   &:hover {
     background-color: $dark-blue-hover;
   }
+
   &.layout-header-login {
     background-color: $light-pink;
+
     &:hover {
       background-color: $light-pink-hover;
     }
   }
 }
+
 .layout-main {
   width: 100%;
   text-shadow: 0 0 5px #000, 0 0 15px #000;
@@ -75,12 +84,14 @@ body {
   height: calc(100vh - 105px);
   overflow-y: auto;
 }
+
 .layout-footer {
   width: 100%;
   height: 45px;
   background-color: $dark-blue;
   display: flex;
   align-items: center;
+
   > div {
     display: flex;
     align-items: center;
@@ -88,12 +99,14 @@ body {
     width: 25%;
   }
 }
+
 .layout-footer-link {
   color: #fff;
   font-size: 14px;
   text-decoration: none;
   font-weight: 700;
   display: flex;
+
   i {
     display: flex;
     justify-content: center;
@@ -104,6 +117,7 @@ body {
     height: 18px;
   }
 }
+
 .layout-footer-author {
   color: #fff;
   font-weight: 900;
@@ -111,17 +125,20 @@ body {
   display: flex;
   align-items: center;
   font-size: 14px;
+
   i {
     font-size: 20px;
     margin-right: 3px;
   }
 }
+
 .layout-footer-note {
   color: #fff;
   font-size: 12px;
   margin-bottom: 2px;
   font-weight: 600;
 }
+
 .layout-header-login-image {
   width: 30px;
   height: 30px;
@@ -129,16 +146,20 @@ body {
   border: 2px solid #fff;
   margin: -7px 0 2px 0;
 }
+
 .layout-header-logo-mobile {
   display: none;
 }
+
 .layout-footer-mobile-icon {
   display: none !important;
 }
+
 @media screen and (max-width: 1099px) {
   .layout-footer {
     flex-wrap: wrap;
     overflow-y: auto;
+
     > div {
       width: 50%;
       height: 45px;
@@ -157,9 +178,11 @@ body {
     color: #fff;
     font-size: 18px;
     cursor: pointer;
+
     &.down {
       top: 0;
     }
+
     &.up {
       top: 45px;
     }
@@ -172,7 +195,6 @@ body {
     display: none;
   }
   .layout-header-logo-mobile {
-    display: block;
     width: 80px;
     height: 100%;
     display: flex;

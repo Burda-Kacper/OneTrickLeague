@@ -2,9 +2,16 @@
 
 namespace App\ServiceCommon;
 
+use Exception;
+
 class TokenService
 {
-    static public function generateToken()
+    /**
+     * @return string
+     *
+     * @throws Exception
+     */
+    static public function generateToken(): string
     {
         return sha1(random_bytes(40));
     }

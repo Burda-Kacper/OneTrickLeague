@@ -4,23 +4,33 @@ namespace App\ServiceQuiz;
 
 use App\Entity\QuizResultCheer;
 use App\Repository\QuizResultCheerRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class QuizResultCheerService
 {
-    private $em;
-    private $repo;
+    /**
+     * @var QuizResultCheerRepository
+     */
+    private QuizResultCheerRepository $repo;
 
-    public function __construct(EntityManagerInterface $em, QuizResultCheerRepository $repo)
+    /**
+     * @param QuizResultCheerRepository $repo
+     */
+    public function __construct(QuizResultCheerRepository $repo)
     {
         $this->repo = $repo;
-        $this->em = $em;
     }
+
+    /**
+     * @param int $score
+     *
+     * @return QuizResultCheer|null
+     */
     public function getQuizResultCheerByScore(int $score): ?QuizResultCheer
     {
         $cheers = $this->repo->findBy([
             'score' => $score
         ]);
+
         return $cheers[array_rand($cheers)];
     }
 }

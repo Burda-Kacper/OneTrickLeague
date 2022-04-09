@@ -10,18 +10,32 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends AbstractController
 {
-    private $userService;
+    /**
+     * @var UserService $userService
+     */
+    private UserService $userService;
 
+    /**
+     * @param UserService $userService
+     */
     public function __construct(UserService $userService)
     {
         $this->userService = $userService;
     }
 
+    /**
+     * @return Response
+     */
     public function users(): Response
     {
         return $this->render('administration/user/users.html.twig');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function usersEntries(Request $request): JsonResponse
     {
         $username = $request->get('username');
@@ -32,7 +46,7 @@ class UserController extends AbstractController
             'order' => $request->get("sort")['order']
         ];
         $users = $this->userService->getUsersByParams([
-            'username' =>  [
+            'username' => [
                 'clausule' => 'LIKE',
                 'value' => "%" . $username . "%"
             ]

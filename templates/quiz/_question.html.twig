@@ -1,12 +1,13 @@
 <div class="quiz-question-container anim-slide-in-up">
-	<div class="quiz-question-meta hidden" data-quaid="{{ qua.id }}" data-token="{{ qua.quiz.token }}"></div>
-	<p class="quiz-question-question">{{ qua.question.question }}</p>
-	<div class="quiz-question-answers ">
-		{% for answer in answers %}
-			<button class="quiz-question-answer otl-box-shadow" data-answer-token="{{ answer.answerToken }}">{{ answer.answer }}</button>
-		{% endfor %}
-	</div>
-	<div class="quiz-question-timer otl-box-shadow">
-		<div class="quiz-question-timer-bar anim-timer-bar-collapse"></div>
-	</div>
+    <div class="quiz-question-meta hidden" data-quaid="{{ qua.id }}" data-token="{{ qua.quiz.token }}"></div>
+    <p class="quiz-question-question">{{ qua.question.question }}</p>
+    <div class="quiz-question-answers ">
+        {% for answer in answers %}
+            <button class="quiz-question-answer otl-box-shadow"
+                    data-answer-token="{{ answer.answerToken }}">{{ answer.answer }}</button>
+        {% endfor %}
+    </div>
+    <div class="quiz-question-timer otl-box-shadow">
+        <div class="quiz-question-timer-bar anim-timer-bar-collapse"></div>
+    </div>
 </div>

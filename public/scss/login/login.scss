@@ -6,27 +6,31 @@
   align-items: center;
   padding: 25px;
 }
+
 .login-container {
   width: 800px;
   display: flex;
   justify-content: space-between;
 }
+
 .login-card {
   width: 375px;
   padding: 15px 15px 30px 15px;
   text-align: left;
 }
+
 .login-header {
   font-size: 30px;
   font-weight: 900;
   margin-bottom: 15px;
 }
+
 .login-label {
   font-weight: 700;
-  margin-bottom: 3px;
   display: block;
   margin-bottom: 10px;
 }
+
 .login-input {
   width: 100%;
   height: 42px;
@@ -39,6 +43,7 @@
   color: #fff;
   margin-bottom: 15px;
 }
+
 .login-button {
   margin: 25px auto 0 auto;
   display: block;
@@ -52,14 +57,17 @@
   border-radius: 10px;
   text-transform: uppercase;
   transition: background-color 0.2s;
+
   &:hover {
     background-color: $light-pink-hover;
   }
 }
+
 @media screen and (max-width: 849px) {
   .login-container {
     flex-wrap: wrap;
     width: 100%;
+
     .left {
       margin-bottom: 25px;
     }

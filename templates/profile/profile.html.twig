@@ -4,26 +4,30 @@
 {% endblock %}
 
 {% block content %}
-	<section class="profile-container anim-slide-in-up">
-		<div class="profile-menu-wrapper">
-			<div class="profile-menu-container">
-				<img class="profile-menu-image" src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>
-				<p class="profile-menu-username">{{ app.user.username }}</p>
-				<button class="profile-menu-link profile-menu-section otl-glass active" data-section="quiz">Quiz</button>
-				{# <button class="profile-menu-link profile-menu-section otl-glass" data-section="cross">Krzyżówka</button> #}
-				<button class="profile-menu-link profile-menu-section otl-glass" data-section="profile">Ustawienia profilu</button>
-				<a href="{{ path('logout') }}" class="profile-menu-link otl-glass">Wyloguj się</a>
-			</div>
-		</div>
-		<div class="profile-data-container"></div>
-	</section>
+    <section class="profile-container anim-slide-in-up">
+        <div class="profile-menu-wrapper">
+            <div class="profile-menu-container">
+                <img class="profile-menu-image" alt="Zdjęcie profile użytkownika"
+                     src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>
+                <p class="profile-menu-username">{{ app.user.username }}</p>
+                <button class="profile-menu-link profile-menu-section otl-glass active" data-section="quiz">Quiz
+                </button>
+                {# <button class="profile-menu-link profile-menu-section otl-glass" data-section="cross">Krzyżówka</button> #}
+                <button class="profile-menu-link profile-menu-section otl-glass" data-section="profile">Ustawienia
+                    profilu
+                </button>
+                <a href="{{ path('logout') }}" class="profile-menu-link otl-glass">Wyloguj się</a>
+            </div>
+        </div>
+        <div class="profile-data-container"></div>
+    </section>
 {% endblock %}
 {% block javascripts %}
-	<script>
-		const profileSectionPath = "{{ path('profile_section') }}";
-const profilePicturePath = "{{ path('profile_picture') }}";
-const quizAddQuestionPath = "{{ path('quiz_add_question') }}";
-const profileChangePasswordPath = "{{ path('profile_password') }}";
-	</script>
-	<script src="js/profile/profile.js"></script>
+    <script>
+        const profileSectionPath = "{{ path('profile_section') }}";
+        const profilePicturePath = "{{ path('profile_picture') }}";
+        const quizAddQuestionPath = "{{ path('quiz_add_question') }}";
+        const profileChangePasswordPath = "{{ path('profile_password') }}";
+    </script>
+    <script src="js/profile/profile.js"></script>
 {% endblock %}

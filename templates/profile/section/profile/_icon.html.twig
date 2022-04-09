@@ -1,9 +1,10 @@
 <div class="profile-image-container otl-glass anim-slide-in-up">
-	<div class="profile-image-select-container">
-		{% for availablePicture in availablePictures %}
-			<div class="profile-image-select-entry" data-picture="{{ availablePicture.id }}">
-				<img src="{{ asset('img/profilePicture/' ~ availablePicture.image) }}"/>
-			</div>
-		{% endfor %}
-	</div>
+    <div class="profile-image-select-container">
+        {% for availablePicture in availablePictures %}
+            <div class="profile-image-select-entry" data-picture="{{ availablePicture.id }}">
+                <img alt="Dostępne zdjęcie profilowe dla użytkownika"
+                     src="{{ asset('img/profilePicture/' ~ availablePicture.image) }}"/>
+            </div>
+        {% endfor %}
+    </div>
 </div>

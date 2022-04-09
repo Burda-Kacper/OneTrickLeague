@@ -2,6 +2,7 @@
   animation-name: anim-slide-in-up;
   animation-duration: 1s;
 }
+
 @keyframes anim-slide-in-up {
   0% {
     opacity: 0;
@@ -12,10 +13,12 @@
     transform: initial;
   }
 }
+
 .anim-slide-in-down {
   animation-name: anim-slide-in-down;
   animation-duration: 1s;
 }
+
 @keyframes anim-slide-in-down {
   0% {
     opacity: 0;
@@ -26,12 +29,14 @@
     transform: initial;
   }
 }
+
 .anim-slide-out-up-absolute {
   max-width: calc(100vw - 50px);
   animation-name: anim-slide-out-up-absolute;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes anim-slide-out-up-absolute {
   0% {
     opacity: 1;
@@ -45,11 +50,13 @@
     visibility: hidden;
   }
 }
+
 .anim-slide-out-up {
   animation-name: anim-slide-out-up;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes anim-slide-out-up {
   0% {
     opacity: 1;
@@ -60,6 +67,7 @@
     transform: translate(0, -50px);
   }
 }
+
 .anim-timer-bar-collapse {
   animation-name: anim-timer-bar-collapse;
   animation-duration: 15s;
@@ -67,6 +75,7 @@
   animation-fill-mode: forwards;
   animation-timing-function: linear;
 }
+
 @keyframes anim-timer-bar-collapse {
   0% {
     transform: scale(1, 1);

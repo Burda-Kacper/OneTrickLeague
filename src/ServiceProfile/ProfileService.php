@@ -15,39 +15,67 @@ class ProfileService
 {
     const PASSWORD_MIN_LENGTH = 8;
 
-    private $em;
-    private $repo;
-    private $profilePictureRepo;
-    private $profileCacheService;
-    private $hasher;
+    /**
+     * @var EntityManagerInterface $em
+     */
+    private EntityManagerInterface $em;
 
+    /**
+     * @var ProfilePictureRepository $profilePictureRepo
+     */
+    private ProfilePictureRepository $profilePictureRepo;
+
+    /**
+     * @var ProfileCacheService $profileCacheService
+     */
+    private ProfileCacheService $profileCacheService;
+
+    /**
+     * @var UserPasswordHasherInterface $hasher
+     */
+    private UserPasswordHasherInterface $hasher;
+
+    /**
+     * @param EntityManagerInterface $em
+     * @param ProfilePictureRepository $profilePictureRepo
+     * @param ProfileCacheService $profileCacheService
+     * @param UserPasswordHasherInterface $hasher
+     */
     public function __construct(
-        EntityManagerInterface $em,
-        UserRepository $repo,
-        ProfilePictureRepository $profilePictureRepo,
-        ProfileCacheService $profileCacheService,
+        EntityManagerInterface      $em,
+        ProfilePictureRepository    $profilePictureRepo,
+        ProfileCacheService         $profileCacheService,
         UserPasswordHasherInterface $hasher
-    ) {
-        $this->repo = $repo;
+    )
+    {
         $this->em = $em;
         $this->profilePictureRepo = $profilePictureRepo;
         $this->profileCacheService = $profileCacheService;
         $this->hasher = $hasher;
     }
 
+    /**
+     * @param User $user
+     * @param int|null $pictureId
+     *
+     * @return MainResponse
+     */
     public function setProfilePicture(User $user, ?int $pictureId): MainResponse
     {
         $picture = $this->profilePictureRepo->findOneBy([
             'id' => $pictureId
         ]);
+
         if (!$picture) {
             return new MainResponse(false, ProfileMessage::PROFILE_WRONG_PICTURE);
         }
 
         $availablePictures = $user->getAvailablePictures();
+
         if (!in_array($picture, $availablePictures->toArray())) {
             return new MainResponse(false, ProfileMessage::PROFILE_UNAVAILABLE_PICTURE);
         }
+
         $user->setProfilePicture($picture);
         $this->em->persist($user);
         $this->em->flush();
@@ -55,6 +83,11 @@ class ProfileService
         return new MainResponse(true, $picture->getImage());
     }
 
+    /**
+     * @param User|null $user
+     *
+     * @return void
+     */
     public function refreshResultCache(?User $user): void
     {
         if ($user) {
@@ -63,11 +96,22 @@ class ProfileService
         }
     }
 
+    /**
+     * @param User $user
+     *
+     * @return QuizResultCache|null
+     */
     public function getUserQuizCache(User $user): ?QuizResultCache
     {
         return $this->profileCacheService->getUserQuizCache($user);
     }
 
+    /**
+     * @param User $user
+     * @param array $passwords
+     *
+     * @return MainResponse
+     */
     public function changePassword(User $user, array $passwords): MainResponse
     {
         if (!$this->hasher->isPasswordValid($user, $passwords['old'])) {

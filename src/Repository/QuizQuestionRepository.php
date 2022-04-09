@@ -14,12 +14,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class QuizQuestionRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, QuizQuestion::class);
     }
 
-    public function getLastQuestionId()
+    /**
+     * @return int
+     */
+    public function getLastQuestionId(): int
     {
         $qb = $this->createQueryBuilder('question')
             ->select("question.id")
@@ -28,7 +34,13 @@ class QuizQuestionRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute()[0]['id'];
     }
 
-    public function getQuestionsForQuiz(array $includedIds, array $excludedIds)
+    /**
+     * @param array $includedIds
+     * @param array $excludedIds
+     *
+     * @return array
+     */
+    public function getQuestionsForQuiz(array $includedIds, array $excludedIds): array
     {
         $qb = $this->createQueryBuilder('question')
             ->select("question")

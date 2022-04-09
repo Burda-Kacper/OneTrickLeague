@@ -4,44 +4,47 @@
 {% endblock %}
 
 {% block aBreadcrumbs %}
-	<a href="{{ path('administration_users') }}" class="a-breadcrumb">Użytkownicy</a>
+    <a href="{{ path('administration_users') }}" class="a-breadcrumb">Użytkownicy</a>
 {% endblock %}
 
 {% block aTitle %}Użytkownicy
 {% endblock %}
 
 {% block aContent %}
-	<div class="a-users-table-content"></div>
+    <div class="a-users-table-content"></div>
 {% endblock %}
 
 {% block aActions %}
-	<p class="a-action-header">Wyszukaj użytkownika</p>
-	<input placeholder="Wyszukaj użytkownika" class="a-action-input mb-30 a-users-filters-username"/>
-	<p class="a-action-header">Sortowanie</p>
-	{# ETODO: Code custom looking selects #}
-	<div class="a-action-sort-container mb-30">
-		<select class="a-action-sort-field a-users-filters-sort-field">
-			<option data-value="username">Nazwa użytkownika</option>
-			<option data-value="lastLogin">Ostatni login</option>
-			<option data-value="registered">Rejestracja</option>
-		</select>
-		<select class="a-action-sort-order a-users-filters-sort-order">
-			<option data-value="ASC">Rosnąco</option>
-			<option data-value="DESC">Malejąco</option>
-		</select>
-	</div>
-	<p class="a-action-header">Wyników na stronę</p>
-	<div class="a-action-buttons mb-30 a-users-filters-amount">
-		<button class="a-action-button a-action-button-3 active" data-amount="10">10</button>
-		<button class="a-action-button a-action-button-3" data-amount="25">25</button>
-		<button class="a-action-button a-action-button-3" data-amount="50">50</button>
-	</div>
-	<button class="a-action-confirm a-users-filters-confirm">Zastosuj filtry</button>
+    <label for="a-users-filters-username" class="a-action-header">Wyszukaj użytkownika</label>
+    <input id="a-users-filters-username" placeholder="Wyszukaj użytkownika"
+           class="a-action-input mb-30 a-users-filters-username"/>
+    <p class="a-action-header">Sortowanie</p>
+    {# ETODO: Code custom looking selects #}
+    <div class="a-action-sort-container mb-30">
+        <label for="a-users-filters-sort-field" class="hidden"></label>
+        <select id="a-users-filters-sort-field" class="a-action-sort-field a-users-filters-sort-field">
+            <option data-value="username">Nazwa użytkownika</option>
+            <option data-value="lastLogin">Ostatni login</option>
+            <option data-value="registered">Rejestracja</option>
+        </select>
+        <label for="a-users-filters-sort-order" class="hidden"></label>
+        <select id="a-users-filters-sort-order" class="a-action-sort-order a-users-filters-sort-order">
+            <option data-value="ASC">Rosnąco</option>
+            <option data-value="DESC">Malejąco</option>
+        </select>
+    </div>
+    <p class="a-action-header">Wyników na stronę</p>
+    <div class="a-action-buttons mb-30 a-users-filters-amount">
+        <button class="a-action-button a-action-button-3 active" data-amount="10">10</button>
+        <button class="a-action-button a-action-button-3" data-amount="25">25</button>
+        <button class="a-action-button a-action-button-3" data-amount="50">50</button>
+    </div>
+    <button class="a-action-confirm a-users-filters-confirm">Zastosuj filtry</button>
 {% endblock %}
 
 {% block aJavascripts %}
-	<script>
-		const getUsersPath = "{{ path('administration_users_entries') }}";
-	</script>
-	<script src="{{ asset('js/administration/users/users.js') }}"></script>
+    <script>
+        const getUsersPath = "{{ path('administration_users_entries') }}";
+    </script>
+    <script src="{{ asset('js/administration/users/users.js') }}"></script>
 {% endblock %}

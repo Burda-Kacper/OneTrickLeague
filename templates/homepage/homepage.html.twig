@@ -4,39 +4,42 @@
 {% endblock %}
 
 {% block content %}
-	<section class="homepage-wrapper">
-		<div class="homepage-container">
-			<div class="left anim-slide-in-up">
-				{{ include("homepage/_homepageIntro.html.twig") }}
-			</div>
-			<div class="right">
-				{{ include('homepage/_scoreboard.html.twig', {
-				scoreboard : {
-					id: 1,
-					hours: 24
-				}
-			}) }}
-				{{ include('homepage/_scoreboard.html.twig', {
-				scoreboard : {
-					id: 2,
-					hours: 168
-				}
-			}) }}
-				{{ include('homepage/_scoreboard.html.twig', {
-				scoreboard : {
-					id: 3,
-					hours: 720
-				}
-			}) }}
-				<div class="homepage-scoreboard-navigation hidden">
-					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-1" data-scoreboard="1"></div>
-					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-2" data-scoreboard="2"></div>
-					<div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-3" data-scoreboard="3"></div>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="homepage-wrapper">
+        <div class="homepage-container">
+            <div class="left anim-slide-in-up">
+                {{ include("homepage/_homepageIntro.html.twig") }}
+            </div>
+            <div class="right">
+                {{ include('homepage/_scoreboard.html.twig', {
+                    scoreboard : {
+                        id: 1,
+                        hours: 24
+                    }
+                }) }}
+                {{ include('homepage/_scoreboard.html.twig', {
+                    scoreboard : {
+                        id: 2,
+                        hours: 168
+                    }
+                }) }}
+                {{ include('homepage/_scoreboard.html.twig', {
+                    scoreboard : {
+                        id: 3,
+                        hours: 720
+                    }
+                }) }}
+                <div class="homepage-scoreboard-navigation hidden">
+                    <div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-1"
+                         data-scoreboard="1"></div>
+                    <div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-2"
+                         data-scoreboard="2"></div>
+                    <div class="homepage-scoreboard-navigation-dot homepage-scoreboard-navigation-dot-3"
+                         data-scoreboard="3"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
 {% block javascripts %}
-	<script src="js/homepage/homepage.js"></script>
+    <script src="js/homepage/homepage.js"></script>
 {% endblock %}

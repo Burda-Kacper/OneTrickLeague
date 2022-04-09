@@ -15,11 +15,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class QuizUserAnsweredRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, QuizUserAnswered::class);
     }
 
+    /**
+     * @param Quiz $quiz
+     *
+     * @return QuizUserAnswered|null
+     */
     public function getNewQuizUserAnswered(Quiz $quiz): ?QuizUserAnswered
     {
         $qb = $this->createQueryBuilder('qua')
@@ -30,9 +38,11 @@ class QuizUserAnsweredRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->setParameter("quiz", $quiz);
         $result = $qb->getQuery()->execute();
+
         if ($result) {
             return $result[0];
         }
+
         return null;
     }
 

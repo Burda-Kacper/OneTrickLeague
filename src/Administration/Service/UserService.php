@@ -3,22 +3,30 @@
 namespace App\Administration\Service;
 
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
 class UserService
 {
+    /**
+     * @var UserRepository
+     */
+    private UserRepository $repo;
 
-    private $em;
-    private $repo;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        UserRepository $repo
-    ) {
+    /**
+     * @param UserRepository $repo
+     */
+    public function __construct(UserRepository $repo)
+    {
         $this->repo = $repo;
-        $this->em = $em;
     }
 
+    /**
+     * @param array $criteria
+     * @param array $orderBy
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return array
+     */
     public function getUsersByParams(array $criteria, array $orderBy, int $limit, int $offset): array
     {
         return $this->repo->getUsersByParams(
