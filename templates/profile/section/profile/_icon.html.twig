@@ -4,6 +4,12 @@
             <div class="profile-image-select-entry" data-picture="{{ availablePicture.id }}">
                 <img alt="Dostępne zdjęcie profilowe dla użytkownika"
                      src="{{ asset('img/profilePicture/' ~ availablePicture.image) }}"/>
+                <div class="profile-image-select-description otl-glass">
+                    {{ availablePicture.description }}
+                </div>
+                <div class="profile-image-select-description-mobile">
+                    {{ availablePicture.description }}
+                </div>
             </div>
         {% endfor %}
     </div>

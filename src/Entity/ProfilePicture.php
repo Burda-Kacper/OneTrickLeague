@@ -29,6 +29,11 @@ class ProfilePicture
      */
     private $userHasPictures;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
     public function __construct()
     {
         $this->userHasPictures = new ArrayCollection();
@@ -71,6 +76,18 @@ class ProfilePicture
     public function removeUserHasPicture(User $userHasPicture): self
     {
         $this->userHasPictures->removeElement($userHasPicture);
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
