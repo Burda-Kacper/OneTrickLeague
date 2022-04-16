@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Message\ProfileMessage;
+use App\Message\QuizMessage;
 use App\ServiceProfile\ProfileService;
 use App\ServiceQuiz\QuizService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -128,5 +129,30 @@ class ProfileController extends AbstractController
         $response = $this->profileService->changePassword($user, $passwords);
 
         return new JsonResponse($response->toJsonResponse());
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function quizDetails(Request $request): JsonResponse
+    {
+        $quizToken = $request->get("quizToken");
+        $quiz = $this->quizService->getQuizByToken($quizToken);
+
+        if (!$quiz) {
+            return new JsonResponse([
+                'success' => false,
+                'data' => QuizMessage::QUIZ_NOT_FOUND
+            ]);
+        }
+
+        return new JsonResponse([
+            'success' => true,
+            'data' => $this->renderView('profile/section/profile/_quizDetails.html.twig', [
+                'quiz' => $quiz
+            ])
+        ]);
     }
 }

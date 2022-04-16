@@ -37,6 +37,9 @@ profile_picture:
 profile_password:
   path: /profile/password
   controller: App\Controller\ProfileController::password
+profile_quiz_details:
+  path: /profile/quizDetails
+  controller: App\Controller\ProfileController::quizDetails
 
 administration_dashboard:
   path: /administration

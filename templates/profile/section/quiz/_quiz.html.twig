@@ -22,7 +22,7 @@
     {% for quiz in userLastQuizes %}
         <div class="profile-quiz-history-entry">
             <p class="profile-quiz-history-date">{{ quiz.started|date("d.m.Y H:i") }}</p>
-            <p class="profile-quiz-history-points">Info
+            <p class="profile-quiz-history-points" data-quiz="{{ quiz.token }}">Info
                 <i class="fas fa-info-circle"></i>
             </p>
         </div>
