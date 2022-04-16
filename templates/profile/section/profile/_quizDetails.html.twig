@@ -1,0 +1,29 @@
+<div class="profile-qd">
+    <div class="profile-qd-bottom">
+        {% set detailsCorrect = 0 %}
+        {% for userAnswer in quiz.userAnswers %}
+            {% if userAnswer.answer.isCorrect %}
+                {% set detailsClass = "correct" %}
+                {% set detailsCorrect = detailsCorrect + 1 %}
+            {% else %}
+                {% set detailsClass = "wrong" %}
+            {% endif %}
+            <div class="profile-qd-row">
+                <p class="profile-qd-question">{{ userAnswer.question.question }}</p>
+                <p class="profile-qd-response {{ detailsClass }}">
+                    <span>Twoja odpowiedź:</span> {{ userAnswer.answer.answer }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="profile-qd-top">
+        <p class="profile-qd-summary">
+            <span>{{ quiz.started|date("d.m.Y H:i") }}</span>
+            <span>Wynik: {{ detailsCorrect }} / 10</span>
+        </p>
+        <p class="profile-qd-link-label">Link do Quizu:</p>
+        <p class="profile-qd-link">
+            {{ url('quiz_saved_enter', {quizSavedToken: quiz.quizSaved.token}) }}
+        </p>
+    </div>
+</div>

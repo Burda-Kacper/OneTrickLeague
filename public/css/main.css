@@ -224,7 +224,7 @@
 
 .modal-container {
   margin: auto;
-  min-width: 400px;
+  width: 400px;
   max-width: 100%;
   padding: 10px 20px;
   color: #fff;
@@ -1273,6 +1273,49 @@ body {
 
 .profile-password-container {
   padding: 15px; }
+
+.profile-qd-row {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #374151; }
+
+.profile-qd-question {
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 400;
+  margin-bottom: 6px; }
+
+.profile-qd-response {
+  font-size: 14px;
+  line-height: 16px; }
+  .profile-qd-response.correct {
+    color: #2ecc71; }
+  .profile-qd-response.wrong {
+    color: #f15946; }
+  .profile-qd-response span {
+    font-weight: 700; }
+
+.profile-qd {
+  display: flex;
+  flex-direction: column-reverse; }
+
+.profile-qd-top {
+  margin-bottom: 25px; }
+
+.profile-qd-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; }
+
+.profile-qd-link-label {
+  font-size: 12px;
+  font-weight: 700; }
+
+.profile-qd-link {
+  word-wrap: break-word;
+  color: #ff66b3;
+  font-size: 14px;
+  font-weight: 700; }
 
 .a-users-list-username {
   display: flex;
