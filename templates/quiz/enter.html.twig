@@ -20,17 +20,24 @@
                 {% else %}
                     <button class="quiz-start-button otl-box-shadow">Rozpocznij Quiz</button>
                 {% endif %}
-                {% if quizSaved is defined and quizSaved.owner.isPublic == true %}
-                    <div>
-                        {# ETODO: Link to an actual profile - create profile viewing mechanism #}
+                <div>
+                    {% if quizSaved is defined and quizSaved.owner is not null and quizSaved.owner.isPublic == true %}
                         <p>Ten Quiz został utworzony przez:</p>
-                        <a href="#" class="quiz-saved-owner-container">
+                        <a href="{{ path('profile_details', {userUrl: quizSaved.owner.profileUrl}) }}"
+                           class="quiz-saved-owner-container" target="_blank">
                             <img alt="Zdjęcie profilowe użytkownika" class="quiz-saved-owner-image"
                                  src="{{ asset("img/profilePicture/" ~ quizSaved.owner.profilePicture.image ) }}"/>
                             <p class="quiz-saved-owner-name">{{ quizSaved.owner.username }}</p>
                         </a>
-                    </div>
-                {% endif %}
+                    {% elseif quizSaved is defined and (quizSaved.owner is not null and quizSaved.owner.isPublic == false) or quizSaved.owner is null %}
+                        <p>Ten Quiz został utworzony przez:</p>
+                        <div class="quiz-saved-owner-container">
+                            <img alt="Zdjęcie profilowe użytkownika" class="quiz-saved-owner-image"
+                                 src="{{ asset("img/profilePicture/1.jpg") }}"/>
+                            <p class="quiz-saved-owner-name">Anonimowy</p>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </section>

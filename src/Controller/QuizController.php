@@ -189,6 +189,14 @@ class QuizController extends AbstractController
     public function addQuizQuestion(Request $request): JsonResponse
     {
         $user = $this->getUser();
+
+        if (!$user->getIsAllowedToAddQuizQuestions()) {
+            return new JsonResponse([
+                'success' => false,
+                'data' => QuizMessage::QUIZ_NEW_QUESTION_NOT_ALLOWED
+            ]);
+        }
+
         $question = $request->get("question");
         $answers = $request->get("answers");
         $response = $this->quizService->addQuizQuestion($user, $question, $answers);

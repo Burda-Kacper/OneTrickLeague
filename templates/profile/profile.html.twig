@@ -4,32 +4,46 @@
 {% endblock %}
 
 {% block content %}
-    <section class="profile-container anim-slide-in-up">
-        <div class="profile-menu-wrapper">
-            <div class="profile-menu-container">
-                <img class="profile-menu-image" alt="Zdjęcie profile użytkownika"
-                     src="{{ asset("img/profilePicture/" ~ app.user.profilePicture.image) }}"/>
-                <p class="profile-menu-username">{{ app.user.username }}</p>
-                <button class="profile-menu-link profile-menu-section otl-glass active" data-section="quiz">Quiz
-                </button>
-                {# <button class="profile-menu-link profile-menu-section otl-glass" data-section="cross">Krzyżówka</button> #}
-                <button class="profile-menu-link profile-menu-section otl-glass" data-section="profile">Ustawienia
-                    profilu
-                </button>
-                <a href="{{ path('logout') }}" class="profile-menu-link otl-glass">Wyloguj się</a>
+    {% if isPublic %}
+        <section class="profile-container anim-slide-in-up" data-user-url="{{ user.profileUrl }}">
+            <div class="profile-menu-wrapper">
+                <div class="profile-menu-container">
+                    {{ include('_profilePhoto.html.twig', {
+                        ppClass: 'profile-menu-image',
+                        ppUser: user
+                    }) }}
+                    <p class="profile-menu-username">{{ user.username }}</p>
+                    <button class="profile-menu-link profile-menu-section otl-glass active" data-section="quiz">Quiz
+                    </button>
+                    {% if isLoggedUser %}
+                        {# <button class="profile-menu-link profile-menu-section otl-glass" data-section="cross">Krzyżówka</button> #}
+                        <button class="profile-menu-link profile-menu-section otl-glass" data-section="profile">
+                            Ustawienia
+                            profilu
+                        </button>
+                        <a href="{{ path('logout') }}" class="profile-menu-link otl-glass">Wyloguj się</a>
+                    {% endif %}
+                </div>
             </div>
+            <div class="profile-data-container"></div>
+        </section>
+    {% else %}
+        <div class="profile-not-public otl-glass anim-slide-in-up">
+            <i class="fa-solid fa-user-lock"></i>
+            <p>Ten użytkownik ustawił swój profil jako prywatny.</p>
         </div>
-        <div class="profile-data-container"></div>
-    </section>
+    {% endif %}
 {% endblock %}
 {% block javascripts %}
-    <script>
-        const profileSectionPath = "{{ path('profile_section') }}";
-        const profilePicturePath = "{{ path('profile_picture') }}";
-        const quizAddQuestionPath = "{{ path('quiz_add_question') }}";
-        const profileChangePasswordPath = "{{ path('profile_password') }}";
-        const profileQuizDetailsPath = "{{ path('profile_quiz_details') }}";
-    </script>
-    <script src="js/profile/profile.js"></script>
-    <script src="js/profile/quizDetails.js"></script>
+    {% if isPublic %}
+        <script>
+            const profileSectionPath = "{{ path('profile_section') }}";
+            const profilePicturePath = "{{ path('profile_picture') }}";
+            const quizAddQuestionPath = "{{ path('quiz_add_question') }}";
+            const profileChangePasswordPath = "{{ path('profile_password') }}";
+            const profileQuizDetailsPath = "{{ path('profile_quiz_details') }}";
+        </script>
+        <script src="/js/profile/profile.js"></script>
+        <script src="/js/profile/quizDetails.js"></script>
+    {% endif %}
 {% endblock %}

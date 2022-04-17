@@ -872,7 +872,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 15px; }
+  margin-top: 15px;
+  text-decoration: none; }
 
 .quiz-saved-owner-image {
   width: 50px;
@@ -1273,6 +1274,16 @@ body {
 
 .profile-password-container {
   padding: 15px; }
+
+.profile-not-public {
+  margin: 50px auto 50px auto;
+  width: 400px;
+  max-width: calc(100% - 30px);
+  padding: 30px 15px; }
+  .profile-not-public i {
+    font-size: 35px;
+    color: #fff;
+    margin-bottom: 30px; }
 
 .profile-qd-row {
   margin-bottom: 12px;

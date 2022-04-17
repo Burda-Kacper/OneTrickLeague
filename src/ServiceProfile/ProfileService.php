@@ -36,22 +36,30 @@ class ProfileService
     private UserPasswordHasherInterface $hasher;
 
     /**
+     * @var UserRepository $userRepo
+     */
+    private UserRepository $userRepo;
+
+    /**
      * @param EntityManagerInterface $em
      * @param ProfilePictureRepository $profilePictureRepo
      * @param ProfileCacheService $profileCacheService
      * @param UserPasswordHasherInterface $hasher
+     * @param UserRepository $userRepo
      */
     public function __construct(
         EntityManagerInterface      $em,
         ProfilePictureRepository    $profilePictureRepo,
         ProfileCacheService         $profileCacheService,
-        UserPasswordHasherInterface $hasher
+        UserPasswordHasherInterface $hasher,
+        UserRepository              $userRepo
     )
     {
         $this->em = $em;
         $this->profilePictureRepo = $profilePictureRepo;
         $this->profileCacheService = $profileCacheService;
         $this->hasher = $hasher;
+        $this->userRepo = $userRepo;
     }
 
     /**
@@ -132,5 +140,17 @@ class ProfileService
         $this->em->flush();
 
         return new MainResponse(true, ProfileMessage::PROFILE_PASSWORD_SAVED);
+    }
+
+    /**
+     * @param string $profileUrl
+     *
+     * @return User|null
+     */
+    public function getUserByUrl(string $profileUrl): ?User
+    {
+        return $this->userRepo->findOneBy([
+            'profileUrl' => $profileUrl
+        ]);
     }
 }

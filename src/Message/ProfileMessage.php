@@ -13,4 +13,6 @@ class ProfileMessage
     const PROFILE_PASSWORD_REPEAT_INCORRECT = "Nowe hasło i powtórzone nowe hasło nie są jednakowe.";
     const PROFILE_PASSWORD_NEW_SHORT = "Nowe hasło jest zbyt krótkie.";
     const PROFILE_PASSWORD_SAVED = "Twoje hasło zostało zmienione.";
+    const PROFILE_USER_NOT_FOUND = "Wystąpił błąd podczas odczytywania danych użytkownika.";
+    const PROFILE_USER_NOT_PUBLIC = "Ten użytkownik ustawił swój profil jako prywatny.";
 }

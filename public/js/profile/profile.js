@@ -15,6 +15,7 @@ function loadProfileSection(section) {
         dataType: "JSON",
         data: {
             section: section,
+            userUrl: $(".profile-container").data('user-url')
         },
     }).done(function (response) {
         if (response.success) {

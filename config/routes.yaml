@@ -28,6 +28,9 @@ quiz_add_question:
 profile_main:
   path: /profile
   controller: App\Controller\ProfileController::profile
+profile_details:
+  path: /profile/user/{userUrl}
+  controller: App\Controller\ProfileController::profileDetails
 profile_section:
   path: /profile/section
   controller: App\Controller\ProfileController::section
