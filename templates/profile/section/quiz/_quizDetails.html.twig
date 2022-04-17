@@ -11,7 +11,11 @@
             <div class="profile-qd-row">
                 <p class="profile-qd-question">{{ userAnswer.question.question }}</p>
                 <p class="profile-qd-response {{ detailsClass }}">
-                    <span>Twoja odpowiedź:</span> {{ userAnswer.answer.answer }}
+                    {% if isLoggedUser %}
+                        <span>Twoja odpowiedź:</span> {{ userAnswer.answer.answer }}
+                    {% else %}
+                        <span>Odpowiedź {{ quiz.user.username }}:</span> {{ userAnswer.answer.answer }}
+                    {% endif %}
                 </p>
             </div>
         {% endfor %}

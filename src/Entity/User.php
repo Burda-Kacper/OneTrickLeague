@@ -89,6 +89,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $registered;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $profileUrl;
+
     public function __construct()
     {
         $this->quizzes = new ArrayCollection();
@@ -372,6 +377,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRegistered(?\DateTimeInterface $registered): self
     {
         $this->registered = $registered;
+
+        return $this;
+    }
+
+    public function getProfileUrl(): ?string
+    {
+        return $this->profileUrl;
+    }
+
+    public function setProfileUrl(string $profileUrl): self
+    {
+        $this->profileUrl = $profileUrl;
 
         return $this;
     }

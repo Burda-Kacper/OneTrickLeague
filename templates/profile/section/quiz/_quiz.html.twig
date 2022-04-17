@@ -33,12 +33,15 @@
         </div>
     {% endif %}
 </div>
-<p class="profile-section-text anim-slide-in-up">Dodaj swoje pytanie:</p>
-<div class="profile-quiz-add otl-glass anim-slide-in-up">
-    {% if app.user.isAllowedToAddQuizQuestions == false %}
-        <p class="profile-quiz-trouble-message">Wygląda na to, że utraciłeś możliwość dodawania pytań. Jeżeli uważasz,
-            że to błąd, możesz skontaktować się z administratorem.</p>
-    {% else %}
-        {{ include("profile/section/quiz/_add.html.twig") }}
-    {% endif %}
-</div>
+{% if isLoggedUser %}
+    <p class="profile-section-text anim-slide-in-up">Dodaj swoje pytanie:</p>
+    <div class="profile-quiz-add otl-glass anim-slide-in-up">
+        {% if app.user.isAllowedToAddQuizQuestions == false %}
+            <p class="profile-quiz-trouble-message">Wygląda na to, że nie masz możliwości dodawania pytań. Jeżeli
+                uważasz,
+                że to błąd, możesz skontaktować się z administratorem.</p>
+        {% else %}
+            {{ include("profile/section/quiz/_add.html.twig") }}
+        {% endif %}
+    </div>
+{% endif %}

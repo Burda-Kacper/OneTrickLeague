@@ -12,4 +12,5 @@ class QuizMessage
     const QUIZ_SAVED_NOT_FOUND = "Podany link do zapisanego quizu jest błędny lub wygasł. Możesz rozpocząć nowy quiz.";
     const QUIZ_NEW_QUESTION_ERROR = "Wystąpił problem z dodaniem nowego pytania. Sprawdź proszę poprawność danych lub zaczekaj chwilę.";
     const QUIZ_NEW_QUESTION_SUCCESS = "Nowe pytanie zostało dodane. Administrator musi je zaakceptować przed pojawieniem się w Quizie. Dziękujemy za Twój wkład w rozwój OTL!";
+    const QUIZ_NEW_QUESTION_NOT_ALLOWED = "Przykro nam, nie możesz obecnie dodawać nowych pytań. Jeżeli uważasz, że to błąd, skontaktuj się proszę z administratorem.";
 }
